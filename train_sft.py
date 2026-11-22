@@ -47,9 +47,11 @@ def main() -> None:
     ap.add_argument("--grad-accumulate", type=int, default=2)
     ap.add_argument("--quantize", action="store_true", help="QLoRA：4bit 底座，显存大幅下降")
     ap.add_argument("--valid", type=int, default=100, help="从训练集划出的验证条数")
+
+    ap.add_argument("--train-file", default="data/train.jsonl", help="训练语料（可混自举数据）")
     args = ap.parse_args()
 
-    rows = to_chat_rows("data/train.jsonl")
+    rows = to_chat_rows(args.train_file)
     rng = random.Random(42)
     rng.shuffle(rows)
     valid_rows = rows[: args.valid]

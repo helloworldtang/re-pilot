@@ -1,200 +1,200 @@
-{"requirement": "提取科学计数法格式的数字。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "匹配科学计数法表示的数值", "regex": "(?:-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "m", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "解析类似90m或45m20s的时长格式。", "regex": "(\\d+h)?(\\d+m)(\\d+s)?", "flags": "m", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "匹配日志中的等级标记", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[WARN] request handled", "2024-01-01 [WARN] done", "server [WARN] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "提取完整的URL地址。", "regex": "(?:https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?)", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "匹配独立的error单词，不包含前后字符", "regex": "\\berror\\b", "flags": "i", "positive": ["error", "ERROR", "start error end"], "negative": ["myerror", "errors", "errorx"]}
-{"requirement": "匹配金额数值，忽略非货币符号。", "regex": "^[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?$", "flags": "", "positive": ["¥199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "提取带引号的字符串内容。", "regex": "\"[^\"]+\"", "flags": "i", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "匹配带货币符号的金额。", "regex": "(?:[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?)", "flags": "m", "positive": ["¥199", "¥1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "验证软件版本号格式是否正确。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "匹配日志中WARN等级的标记。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[WARN] request handled", "2024-01-01 [WARN] done", "server [WARN] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "匹配常见电子邮件地址格式", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["contact@test.org", "bob.wu@api.io", "user01@mail.cn"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "提取带有货币符号的金额。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "", "positive": ["¥199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "验证密码是否包含大小写字母和数字。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "i", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "抓取URL链接，排除非HTTP协议地址。", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "从文本中提取总价数值，排除非总价字段的数字。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "提取特定位置的数字值。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?|(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000", "Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "提取包含金额符号的数值格式。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "", "positive": ["$199", "$1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "验证URL地址格式是否正确。", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "识别金额，如¥199或$1,299.67", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "", "positive": ["¥199", "$1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "识别符合格式的时间字符串。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "提取中国大陆手机号，如15350842431。", "regex": "(?P<num>1[3-9]\\d{9})", "flags": "", "positive": ["15350842431", "19839248481", "15004169105"], "negative": ["3021516758", "646339534811", "20501476427", "1389615738"]}
-{"requirement": "识别标准十六进制颜色代码，如#4B570a。", "regex": "(?:#[0-9a-fA-F]{6}\\b)", "flags": "", "positive": ["#4B570a", "#58A0AA", "#1c451f"], "negative": ["#447Db", "C8e7e5", "#GGGGGG", "#375ED12c"]}
-{"requirement": "匹配点分隔日期格式，不匹配简写或无分隔符形式。", "regex": "\\d{4}\\.\\d{2}\\.\\d{2}", "flags": "", "positive": ["2026.03.14", "2026.11.02", "2026.12.31"], "negative": ["2026.3.14", "20240314", "14.03.2026"]}
-{"requirement": "识别中国大陆车牌号格式", "regex": "^[京津沪粤苏浙][A-Z][A-Z0-9]{5}$", "flags": "i", "positive": ["津E97BA5", "津G67722", "津B06C04"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "识别日志中的INFO/WARN/ERROR/DEBUG标记。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[DEBUG] request handled", "2024-01-01 [DEBUG] done", "server [DEBUG] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "匹配使用冒号分隔的MAC地址。", "regex": "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}", "flags": "", "positive": ["79:eE:44:A5:01:Fb", "af:eB:8B:e4:B5:CD", "eE:EC:dA:EE:B9:bf"], "negative": ["A4:b9:fB:0f:f9", "g7:2e:9b:d8:49:00"]}
-{"requirement": "匹配标准时间格式，不接受非数字分隔符", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "m", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "识别以gif、jpg、png结尾的文件名。", "regex": "[\\w.-]+\\.(gif|jpg|png)", "flags": "", "positive": ["shot-2024.jpg", "photo01.png", "photo01.png"], "negative": ["readme.md", "archive.zip", "noext", ".png"]}
-{"requirement": "验证科学计数法格式的数字。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "m", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "提取中国大陆手机号码格式。", "regex": "1[3-9]\\d{9}", "flags": "", "positive": ["18321464493", "18999516793", "15505573857"], "negative": ["3680119236", "037681187233", "23510409614", "1397315391"]}
-{"requirement": "提取中国大陆车牌号，如京C29508。", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "m", "positive": ["京C29508", "粤E7C441", "津G35A99"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "识别YYYY.MM.DD格式的日期。", "regex": "\\d{4}\\.\\d{2}\\.\\d{2}", "flags": "", "positive": ["2024.03.14", "2024.11.02", "2024.12.31"], "negative": ["2024.3.14", "20240314", "14.03.2024"]}
-{"requirement": "匹配标准格式的日期", "regex": "\\d{4}/\\d{2}/\\d{2}", "flags": "i", "positive": ["2025/03/14", "2025/11/02", "2025/12/31"], "negative": ["2025/3/14", "20240314", "14/03/2025"]}
-{"requirement": "识别符合版本号格式的字符串。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "i", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "识别十六进制颜色代码，排除不完整格式。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "", "positive": ["#7FF0bE", "#0dde38", "#Ba77F6"], "negative": ["#3f28e", "Cab825", "#GGGGGG", "#CB59C550"]}
-{"requirement": "匹配以http或https开头的网址。", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "匹配包含小时、分钟和秒的时长。", "regex": "(\\d+h)?(\\d+m)(\\d+s)?", "flags": "", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "匹配六位十六进制颜色代码。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "i", "positive": ["#42C287", "#D0e0b9", "#fF7d13"], "negative": ["#afEC3", "2a1312", "#GGGGGG", "#c4d00A14"]}
-{"requirement": "匹配MAC地址格式。", "regex": "([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2}", "flags": "", "positive": ["e6-2F-6e-2f-82-C0", "Fd-cD-a9-aE-1B-bf", "06-80-3E-2f-c2-e0"], "negative": ["72-FA-EE-2e-50", "g7-6E-13-3F-4e-6B"]}
-{"requirement": "匹配科学计数法表示的数值。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "提取带双引号的字符串内容。", "regex": "^\"[^\"]+\"$", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "验证软件版本号格式。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "i", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "提取总价字段的数字。", "regex": "(?:(?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "识别特定类型的图片文件名。", "regex": "(?P<num>[\\w.-]+\\.(gif|jpeg|png))", "flags": "", "positive": ["img_v2.gif", "logo.jpeg", "photo01.jpeg"], "negative": ["readme.md", "archive.zip", "noext", ".png"]}
-{"requirement": "验证包含大小写字母和数字的密码。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "匹配日志中WARN等级标记，不匹配其他级别。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "m", "positive": ["[WARN] request handled", "2024-01-01 [WARN] done", "server [WARN] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "匹配科学计数法表示的数字。", "regex": "(-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "m", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "识别日志中的等级或日期格式。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]|\\d{4}/\\d{2}/\\d{2}", "flags": "", "positive": ["[WARN] request handled", "2024-01-01 [WARN] done", "server [WARN] ok", "2024/03/14", "2024/11/02", "2024/12/31"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "验证包含大小写字母和数字的密码，长度8到16位。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "i", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "判断数值是否为科学计数法", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "匹配18位身份证号码，如01709264070308808X。", "regex": "^\\d{17}[\\dXx]$", "flags": "", "positive": ["01709264070308808X", "172628296824485007", "288959274116806919"], "negative": ["6127662080820391", "702634443596245870Y", "12042425369091237"]}
-{"requirement": "提取由 2-4 个汉字组成的词语", "regex": "([一-龥]{2,4})", "flags": "i", "positive": ["夥啉", "踍猾", "翘挥"], "negative": ["征", "hello123", "中x"]}
-{"requirement": "匹配科学计数法数值格式。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "i", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "匹配图片文件名，如logo.gif或shot-2024.gif。", "regex": "[\\w.-]+\\.(gif|jpeg|jpg)", "flags": "", "positive": ["logo.gif", "logo.jpg", "shot-2024.gif"], "negative": ["readme.md", "archive.zip", "noext", ".png"]}
-{"requirement": "验证以http开头的完整网址", "regex": "^https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?$", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "识别十六进制颜色代码，排除不完整格式。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "", "positive": ["#ADEE9c", "#eF6c62", "#c670B9"], "negative": ["#c13f5", "c4A076", "#GGGGGG", "#c9D1A9Ff"]}
-{"requirement": "提取两个到四个汉字组成的词语。", "regex": "[一-龥]{2,4}", "flags": "", "positive": ["殍衘癋", "峅泚蛶艸", "堳笍閽"], "negative": ["躸", "hello123", "中x"]}
-{"requirement": "提取总价字段中的数字值", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "匹配包含小时分钟秒的时长格式。", "regex": "((\\d+h)?(\\d+m)(\\d+s)?)", "flags": "i", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "验证电子邮箱格式，如user01@mail.cn", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "i", "positive": ["user01@mail.cn", "alice@example.com", "bob.wu@example.com"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "匹配HTML标签。", "regex": "<.+?>", "flags": "i", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "匹配HTML标签内容，不包含子标签。", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "提取标准格式的电子邮件地址。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "i", "positive": ["contact@example.com", "alice@example.com", "contact@example.com"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "提取文本中总价数值，忽略其他内容。", "regex": "((?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "提取文本中总价后的数字，如总价: 12800", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "匹配带双引号的字符串。", "regex": "\"[^\"]+\"", "flags": "i", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "验证包含大小写字母和数字的密码。", "regex": "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}$", "flags": "i", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "从文本中提取四个到六个汉字的词语。", "regex": "[一-龥]{4,6}", "flags": "", "positive": ["尯戳淳逘", "度騈芅盢蟊謻", "弖潝搴駨矮爑"], "negative": ["杭", "hello123", "中x"]}
-{"requirement": "匹配独立英文单词failed。", "regex": "\\bfailed\\b", "flags": "i", "positive": ["failed", "FAILED", "start failed end"], "negative": ["myerror", "errors", "failedx"]}
-{"requirement": "匹配邮箱地址，不接受无@符号的文本。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["alice@mail.cn", "bob.wu@api.io", "user01@mail.cn"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "匹配不贪婪的HTML标签。", "regex": "<.+?>", "flags": "m", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "识别科学计数法表示的数值。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "i", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "匹配带有货币符号的金额格式。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "m", "positive": ["$199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "提取总价数值。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "i", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "提取日志中INFO级别的标记，如[INFO]。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[INFO] request handled", "2024-01-01 [INFO] done", "server [INFO] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "匹配版本号，如v2.0.1或3.4.5-beta", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "i", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "匹配标准IPv4地址格式", "regex": "^((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)$", "flags": "", "positive": ["48.162.74.187", "8.163.211.247", "106.155.226.191"], "negative": ["256.1.1.1", "1.2.3", "1..2.3"]}
-{"requirement": "提取日志中的INFO等级标记。", "regex": "(?:\\[(INFO|WARN|ERROR|DEBUG)\\])", "flags": "", "positive": ["[INFO] request handled", "2024-01-01 [INFO] done", "server [INFO] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "匹配带双引号的字符串内容。", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "验证密码是否符合强度要求。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}|\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "m", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz", "9:05", "23:59", "0:00"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "识别符合科学计数法的数字。", "regex": "(?P<data>-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "i", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "匹配格式为YYYY.MM.DD的日期。", "regex": "\\d{4}\\.\\d{2}\\.\\d{2}", "flags": "", "positive": ["2024.03.14", "2024.11.02", "2024.12.31"], "negative": ["2024.3.14", "20240314", "14.03.2024"]}
-{"requirement": "提取带有货币符号的金额，如$199或¥1,299。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "i", "positive": ["$199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "匹配版本号格式，包含主次版本和可选标签。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "i", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "匹配4到6个中文汉字组成的词语。", "regex": "[一-龥]{4,6}", "flags": "", "positive": ["咛淒鸓瑌程", "柳泚桰錮韾", "浂瑻鷔簆"], "negative": ["德", "hello123", "中x"]}
-{"requirement": "提取以http或https开头的完整URL", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "匹配完整URL，排除非HTTP协议或未闭合路径", "regex": "(?P<value>https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?)", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "匹配时长格式，如90m或1h30m。", "regex": "(\\d+h)?(\\d+m)(\\d+s)?", "flags": "", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "匹配中国大陆车牌号格式", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "i", "positive": ["浙F9CB46", "苏G54899", "沪B9978B"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "提取符合标准格式的MAC地址。", "regex": "([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2}", "flags": "i", "positive": ["4C-fa-Ab-DB-A6-3F", "17-16-49-64-DB-6C", "b8-4D-d2-B8-8c-E5"], "negative": ["EE-6b-CF-EA-D5", "g7-28-Fd-4B-62-E8"]}
-{"requirement": "匹配4到6个中文汉字组成的词语。", "regex": "[一-龥]{4,6}", "flags": "", "positive": ["畽蝌艴橓", "捑銜桤鸉尞鲀", "砳床魯錗傌傳"], "negative": ["纉", "hello123", "中x"]}
-{"requirement": "验证标准邮箱地址格式。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "i", "positive": ["alice@api.io", "team_dev@test.org", "user01@example.com"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "提取带货币符号的金额，如$199或¥12,345.67", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "", "positive": ["$199", "$1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "识别符合规范的车牌号码。", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "", "positive": ["浙F537B4", "沪G84A38", "沪CB8810"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "密码需包含大小写字母和数字，长度8到16位", "regex": "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16})", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "提取十六进制颜色码，如#368d2c。", "regex": "#[0-9a-fA-F]{6}\\b|(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "", "positive": ["#368d2c", "#8Fc2a4", "#da7444", "总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["#F8e1F", "A3038A", "#GGGGGG", "#35Ce2DBB"]}
-{"requirement": "验证包含大小写字母和数字的密码。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "匹配中国大陆车牌号，如浙C3A079", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "", "positive": ["浙C3A079", "粤D18695", "粤BCCABA"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "从文本中提取总价数值。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "提取符合YYYY/MM/DD格式的日期字符串。", "regex": "\\d{4}/\\d{2}/\\d{2}", "flags": "", "positive": ["2026/03/14", "2026/11/02", "2026/12/31"], "negative": ["2026/3/14", "20240314", "14/03/2026"]}
-{"requirement": "提取符合格式的网址，不包含协议类型。", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "提取中国大陆手机号，如13137535821。", "regex": "1[3-9]\\d{9}", "flags": "", "positive": ["13137535821", "13728878072", "18903716160"], "negative": ["8819722399", "647718375307", "26810248085", "1357800244"]}
-{"requirement": "验证包含大小写字母和数字的密码。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "匹配类似'9:05'这样的时间格式。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "i", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "匹配独立单词warning，如start warning end", "regex": "\\bwarning\\b", "flags": "i", "positive": ["warning", "WARNING", "start warning end"], "negative": ["myerror", "errors", "warningx"]}
-{"requirement": "匹配支持的图片格式文件名", "regex": "[\\w.-]+\\.(jpeg|png|jpg)|\\d{17}[\\dXx]", "flags": "", "positive": ["photo01.png", "shot-2024.png", "logo.jpeg", "344966866798994706", "170690149711038471", "56756650518860167X"], "negative": ["readme.md", "archive.zip", "noext", ".png"]}
-{"requirement": "识别标准十六进制颜色代码。", "regex": "(?P<item>#[0-9a-fA-F]{6}\\b)", "flags": "", "positive": ["#0f402D", "#e0B94B", "#f8F2dF"], "negative": ["#5fDd6", "Eca25D", "#GGGGGG", "#aba2F00b"]}
-{"requirement": "匹配科学计数法数字。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "m", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "识别带有版本号格式的字符串。", "regex": "(?P<num>v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?)", "flags": "", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "匹配金额，如¥199。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "", "positive": ["¥199", "$1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "提取时间格式，不匹配非时间格式。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "m", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "匹配中国大陆手机号码，如15075598414", "regex": "1[3-9]\\d{9}|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)\\.){3}(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)", "flags": "", "positive": ["15075598414", "15024843507", "17509332809", "74.239.49.47", "100.208.219.28", "87.126.111.205"], "negative": ["9970244043", "109077182353", "22773765547", "1361727573"]}
-{"requirement": "确保密码包含大小写字母和数字。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "从文本中提取总价数值。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "匹配https://api.service.cn这样的URL。", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "提取HTML标签内容。", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "提取符合标准的网址格式。", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "识别符合格式的MAC地址。", "regex": "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}|([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}", "flags": "", "positive": ["5d:C5:8D:93:B0:2c", "FC:Eb:DD:33:E5:C9", "d8:17:23:B4:Be:D3", "BF:6f:bF:95:AA:9c", "7f:f7:9E:BE:a1:70", "5e:f4:F2:eC:62:c5"], "negative": ["C1:bD:cd:Fd:EC", "g7:bC:b3:2E:40:67"]}
-{"requirement": "匹配两到四个汉字组成的词语。", "regex": "[一-龥]{2,4}", "flags": "", "positive": ["啀搷熕絢", "唬堃", "残页"], "negative": ["锯", "hello123", "中x"]}
-{"requirement": "匹配HTML标签内容。", "regex": "(?P<value><.+?>)", "flags": "i", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "识别版本号格式，如 v2.0.1 或 3.4.5-beta", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "m", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "匹配符合规范的邮箱地址", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["user01@test.org", "alice@api.io", "bob.wu@example.com"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "识别中国大陆手机号，不匹配非手机号格式。", "regex": "1[3-9]\\d{9}", "flags": "m", "positive": ["15494466574", "15748969108", "17899441715"], "negative": ["4544432830", "965207446660", "29935387584", "1328241724"]}
-{"requirement": "提取完整URL地址", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "匹配科学计数法表示的数字。", "regex": "(?P<data>-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "m", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "从文本中提取总价数值。", "regex": "(?P<value>(?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "匹配时间格式，如23:59。", "regex": "(\\d{1,2}:\\d{2}(:\\d{2})?)", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "验证邮箱地址或符合要求的密码格式", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}|(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["alice@example.com", "bob.wu@test.org", "contact@test.org", "Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "提取位于总价后的数字。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "识别科学计数法表示的数值。", "regex": "(-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "i", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "提取六位十六进制颜色码，如#5CAfdd", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "", "positive": ["#5CAfdd", "#65fFC1", "#8466B3"], "negative": ["#0c1AD", "2f11b4", "#GGGGGG", "#4D2A8beE"]}
-{"requirement": "匹配独立的success单词。", "regex": "\\bsuccess\\b", "flags": "i", "positive": ["success", "SUCCESS", "start success end"], "negative": ["myerror", "errors", "successx"]}
-{"requirement": "匹配包含小时、分钟和秒的时长格式，如1h30m。", "regex": "(?:(\\d+h)?(\\d+m)(\\d+s)?)", "flags": "", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "提取带引号的字符串，如\"hello\"。", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "验证包含大小写字母和数字的密码。", "regex": "(?P<value>(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16})", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "验证标准时间格式，排除非数字分隔符或空字符串", "regex": "^\\d{1,2}:\\d{2}(:\\d{2})?$", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "匹配日志等级关键字，不匹配大小写或未正确格式化的。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[ERROR] request handled", "2024-01-01 [ERROR] done", "server [ERROR] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
-{"requirement": "匹配中国大陆手机号码。", "regex": "1[3-9]\\d{9}", "flags": "", "positive": ["18940978738", "18183410006", "18584843930"], "negative": ["0460356089", "706493759044", "27905830470", "1327890276"]}
-{"requirement": "确保密码包含大小写字母和数字，如Abcdef12。", "regex": "(?:(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16})", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "识别有效的电子邮件地址格式。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["team_dev@mail.cn", "team_dev@test.org", "user01@api.io"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "提取包含小时、分钟和秒的时长格式。", "regex": "(?P<item>(\\d+h)?(\\d+m)(\\d+s)?)", "flags": "i", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "提取中文词语，如峧頑", "regex": "(?:[一-龥]{2,4})", "flags": "", "positive": ["峧頑", "邘佁滂捗", "竎痏恓"], "negative": ["釃", "hello123", "中x"]}
-{"requirement": "提取格式正确的日期字符串。", "regex": "(?P<value>\\d{4}\\-\\d{2}\\-\\d{2})", "flags": "", "positive": ["2024-03-14", "2024-11-02", "2024-12-31"], "negative": ["2024-3-14", "20240314", "14-03-2024"]}
-{"requirement": "验证包含大小写字母和数字的密码，长度8到16位。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "m", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "提取带引号的字符串内容", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "匹配有效URL，排除非http协议或缺少域名的地址。", "regex": "(?:https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?)", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "提取总价后的数字信息。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "识别中国主要城市的车牌号码。", "regex": "([京津沪粤苏浙][A-Z][A-Z0-9]{5})", "flags": "m", "positive": ["沪B38005", "沪CA2280", "京C61931"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "识别MAC地址的十六进制格式。", "regex": "([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2}", "flags": "i", "positive": ["aF-Af-e2-cD-9e-E4", "5E-ad-ED-Cc-22-5a", "7a-aE-98-DE-c8-eb"], "negative": ["65-c3-32-fB-10", "g7-ed-55-04-7F-82"]}
-{"requirement": "识别两个到四个汉字组成的词语。", "regex": "[一-龥]{2,4}", "flags": "", "positive": ["巺狞弱匉", "櫬铗炜", "睷叢漯腟"], "negative": ["悷", "hello123", "中x"]}
-{"requirement": "匹配HTML标签中的单个标签。", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "提取总价字段的数字。", "regex": "(?:(?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "匹配金额格式，如¥1,299。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "m", "positive": ["$199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "匹配特定地区的车牌号码。", "regex": "(?:[京津沪粤苏浙][A-Z][A-Z0-9]{5})", "flags": "", "positive": ["京C62608", "沪D41118", "津C224C1"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "匹配电子邮箱地址。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["contact@test.org", "user01@example.com", "contact@test.org"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "提取被双引号包围的字符串内容。", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "验证邮箱格式，排除无效地址。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["contact@mail.cn", "bob.wu@example.com", "contact@mail.cn"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "匹配独立的warning单词", "regex": "\\bwarning\\b", "flags": "i", "positive": ["warning", "WARNING", "start warning end"], "negative": ["myerror", "errors", "warningx"]}
-{"requirement": "识别特定地区车牌号，不匹配无地区代码或格式错误。", "regex": "([京津沪粤苏浙][A-Z][A-Z0-9]{5})", "flags": "", "positive": ["粤D26235", "浙G96053", "京BB61B8"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "识别包含小时、分钟和秒的时长表达式。", "regex": "(?P<key>(\\d+h)?(\\d+m)(\\d+s)?)", "flags": "", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "提取总价数值。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "识别科学计数法表示的数值。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "i", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
-{"requirement": "验证包含大小写和数字的密码格式", "regex": "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16})", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "提取包含货币符号的金额数字。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "m", "positive": ["$199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "识别版本号，如1.2或v2.0.1。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?|<.+?>", "flags": "m", "positive": ["1.2", "v2.0.1", "3.4.5-beta", "<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "提取HTML中单个标签，如<b>bold</b>。", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "提取版本号，如v2.0.1。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "i", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "匹配中文词语", "regex": "[一-龥]{2,4}", "flags": "i", "positive": ["噫皈搈卩", "鰦鯮踼", "饹琘"], "negative": ["骉", "hello123", "中x"]}
-{"requirement": "验证MAC地址格式，包含连字符。", "regex": "(?P<key>([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2})", "flags": "i", "positive": ["aC-7f-dd-3E-FF-BC", "96-fE-1b-5c-6b-21", "18-c5-fe-Fc-ae-4a"], "negative": ["41-47-AD-f8-65", "g7-aC-50-58-d2-fa"]}
-{"requirement": "识别十六进制颜色码。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "i", "positive": ["#A77C34", "#3EFBf0", "#c5C65A"], "negative": ["#A1CB6", "543130", "#GGGGGG", "#575002Ac"]}
-{"requirement": "匹配六位十六进制颜色代码。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "", "positive": ["#BE9b6C", "#f8DECb", "#0e0ABd"], "negative": ["#90dfb", "d051B0", "#GGGGGG", "#F3C5D155"]}
-{"requirement": "验证十六进制颜色代码格式。", "regex": "^#[0-9a-fA-F]{6}\\b$", "flags": "i", "positive": ["#C6cFB9", "#4dAb3f", "#Ce6dfC"], "negative": ["#D1204", "Ef2D1F", "#GGGGGG", "#DaF406BF"]}
-{"requirement": "提取以http或https开头的完整URL", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
-{"requirement": "匹配中国大陆手机号码，如15627924632。", "regex": "1[3-9]\\d{9}", "flags": "", "positive": ["15627924632", "13374767753", "18260321450"], "negative": ["5766194588", "707155348201", "22840083850", "1376597595"]}
-{"requirement": "验证邮箱地址，如alice@mail.cn。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["alice@mail.cn", "user01@mail.cn", "user01@test.org"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
-{"requirement": "从文本中提取总价信息，忽略无关内容。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "i", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
-{"requirement": "提取包含版本号的字符串。", "regex": "(?P<num>v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?)", "flags": "i", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
-{"requirement": "匹配常见图片格式的文件名。", "regex": "^[\\w.-]+\\.(gif|jpeg|jpg)$", "flags": "", "positive": ["photo01.jpg", "shot-2024.jpeg", "logo.gif"], "negative": ["readme.md", "archive.zip", "noext", ".png"]}
-{"requirement": "提取包含小时和分钟的时间格式。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "匹配标准MAC地址，如1c:CA:6c:DE:46:a7。", "regex": "(?P<value>([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2})", "flags": "m", "positive": ["1c:CA:6c:DE:46:a7", "8B:8A:d8:e1:A5:37", "CA:da:8d:54:05:25"], "negative": ["00:BA:c7:9c:e7", "g7:F4:0b:a0:66:01"]}
-{"requirement": "提取日期格式，如2024/03/14。", "regex": "\\d{4}/\\d{2}/\\d{2}", "flags": "", "positive": ["2024/03/14", "2024/11/02", "2024/12/31"], "negative": ["2024/3/14", "20240314", "14/03/2024"]}
-{"requirement": "验证包含大小写和数字的密码，如Abcdef12", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "m", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "提取中文词语。", "regex": "[一-龥]{2,4}", "flags": "", "positive": ["餴鞝飼冶", "劺屛听鈡", "铬禎警欫"], "negative": ["韩", "hello123", "中x"]}
-{"requirement": "提取格式为小时:分钟的时间字符串。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
-{"requirement": "匹配中国大陆手机号码。", "regex": "(1[3-9]\\d{9})", "flags": "", "positive": ["18758708943", "15698344369", "17805045050"], "negative": ["9284672007", "342939077372", "29545038016", "1325851502"]}
+{"requirement": "提取全角数字，如 编号１２３４。", "regex": "([０-９]{2,})", "flags": "", "positive": ["编号１２３４", "房间 ０５ 室", "电话０８６"], "negative": ["12345", "一百分", "abc"]}
+{"requirement": "识别全角数字格式", "regex": "(?P<num>[０-９]{2,})", "flags": "", "positive": ["编号１２３４", "房间 ０５ 室", "电话０８６"], "negative": ["12345", "一百分", "abc"]}
+{"requirement": "提取HTML标签内容。", "regex": "(?P<num><.+?>)", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "提取经纬度坐标数据。", "regex": "-?\\d{1,2}\\.\\d{4,},\\s*-?\\d{1,3}\\.\\d{4,}", "flags": "", "positive": ["31.2304, 121.4737 上海", "坐标 39.9042,116.4074", "-33.8688, 151.2093"], "negative": ["31.23, 121.47", "经纬 31 度", "31.2304 单值"]}
+{"requirement": "匹配HTML标签内容。", "regex": "(<.+?>)", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "验证包含邮箱地址或UUID的格式。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}|\\b[0-9a-f]{7,40}\\b", "flags": "m", "positive": ["contact@example.com", "contact@api.io", "contact@mail.cn", "commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
+{"requirement": "提取git提交的简短哈希值。", "regex": "(?P<data>\\b[0-9a-f]{7,40}\\b)", "flags": "m", "positive": ["commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["123456", "xyzabcd", "g123456"]}
+{"requirement": "识别MAC地址格式", "regex": "([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2}", "flags": "", "positive": ["23-8C-eA-Ae-Ca-62", "40-90-Ca-97-ef-Ed", "d3-A6-1A-bA-11-3B"], "negative": ["df-Bd-5E-30-fB", "g7-29-6C-2a-22-87"]}
+{"requirement": "提取总价后的数字，忽略其他情况", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "提取日志等级标识。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "m", "positive": ["[DEBUG] request handled", "2024-01-01 [DEBUG] done", "server [DEBUG] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
+{"requirement": "匹配金额，如 ¥12,345.67", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "m", "positive": ["¥199", "¥1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "匹配十六进制颜色代码。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "", "positive": ["#853Ebe", "#4DC284", "#c1f276"], "negative": ["#C287B", "4ec9Fc", "#GGGGGG", "#346Dba8b"]}
+{"requirement": "匹配时间格式如小时和分钟", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "识别文本中的金额或网址。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "", "positive": ["¥199", "$1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "提取带版本号的字符串，如 v2.0.1 或 3.4.5-beta。", "regex": "(?P<item>v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?)", "flags": "", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
+{"requirement": "匹配 SQL 中的字符串字面量如 '张三'。", "regex": "('[^']*')", "flags": "m", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "提取标准格式的电子邮箱地址。", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["team_dev@mail.cn", "team_dev@api.io", "user01@mail.cn"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
+{"requirement": "匹配命令行长选项", "regex": "(?:--[a-z][a-z0-9-]{2,})", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "提取日志等级，如 [WARN] request handled。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[WARN] request handled", "2024-01-01 [WARN] done", "server [WARN] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
+{"requirement": "匹配YYYY-MM-DD格式的日期，不支持单月单日。", "regex": "\\d{4}\\-\\d{2}\\-\\d{2}", "flags": "", "positive": ["2026-03-14", "2026-11-02", "2026-12-31"], "negative": ["2026-3-14", "20240314", "14-03-2026"]}
+{"requirement": "匹配经纬度坐标的格式。", "regex": "(?P<value>-?\\d{1,2}\\.\\d{4,},\\s*-?\\d{1,3}\\.\\d{4,})", "flags": "", "positive": ["31.2304, 121.4737 上海", "坐标 39.9042,116.4074", "-33.8688, 151.2093"], "negative": ["31.23, 121.47", "经纬 31 度", "31.2304 单值"]}
+{"requirement": "识别SQL字符串字面量，如'abc123'。", "regex": "'[^']*'", "flags": "i", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "提取命令行长选项", "regex": "(--[a-z][a-z0-9-]{2,})", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "识别特定地区车牌号格式", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}|:\\s*-?\\d+(?:\\.\\d+)?\\b", "flags": "", "positive": ["浙E92608", "粤E82C81", "沪G27873", "{\"count\": 42}", "{\"price\": -3.5 有", "{\"id\":100}"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "匹配被双引号包围的字符串内容。", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
+{"requirement": "提取HTML标签内容。", "regex": "(<.+?>)", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "提取标准cron格式的时间表达式，如 0 8 * * *。", "regex": "(\\d{1,2} |\\* ){4}(\\d{1,2}|\\*)", "flags": "m", "positive": ["0 8 * * * 任务", "30 4 1 * * 备份", "15 2 3 4 5 触发"], "negative": ["* * 不好", "0 8 *", "cron 表达式"]}
+{"requirement": "识别金额格式，包含货币符号。", "regex": "([¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?)", "flags": "m", "positive": ["$199", "$1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "匹配MAC地址，格式为六组两位十六进制数", "regex": "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}", "flags": "m", "positive": ["CF:2C:7F:5a:4B:4E", "ce:35:cD:7e:C8:DD", "Ca:55:a5:Dd:88:9F"], "negative": ["77:1d:80:DA:0a", "g7:7E:dB:dA:33:29"]}
+{"requirement": "提取十六进制颜色码，如#faE5aE", "regex": "(#[0-9a-fA-F]{6}\\b)", "flags": "", "positive": ["#faE5aE", "#10e865", "#C5f24D"], "negative": ["#dEdcd", "fc01B6", "#GGGGGG", "#b0aA60F0"]}
+{"requirement": "提取Markdown行内代码，如`uv sync`", "regex": "`[^`]+`", "flags": "m", "positive": ["运行 `uv sync` 即可", "看 `cli.py` 文件", "命令 `ls -l` 输出"], "negative": ["普通命令", "``", "无代码"]}
+{"requirement": "提取HTTP状态行或端口号。", "regex": "HTTP/1\\.[01] \\d{3}|:\\d{2,5}\\b", "flags": "m", "positive": ["HTTP/1.1 200 OK", "响应 HTTP/1.0 404 未找到", "HTTP/1.1 500 错误", "服务 localhost:8080 运行", "连接 db:5432 成功", "端口 :3000 开放"], "negative": ["200 OK", "HTTP 200", "HTTP/2 200"]}
+{"requirement": "提取相对路径", "regex": "\\.{1,2}/[\\w./-]+", "flags": "i", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "识别软件版本号，包含主次版本和可选标签", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "m", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
+{"requirement": "识别符合规范的电子邮件地址", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "m", "positive": ["team_dev@mail.cn", "bob.wu@api.io", "alice@example.com"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
+{"requirement": "匹配git哈希值。", "regex": "(\\b[0-9a-f]{7,40}\\b)", "flags": "", "positive": ["commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["123456", "xyzabcd", "g123456"]}
+{"requirement": "匹配标准格式的MAC地址。", "regex": "^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$", "flags": "", "positive": ["63:df:0A:1b:cB:bd", "ce:1c:7c:42:CA:cb", "b1:9C:98:9E:1e:dc"], "negative": ["Dc:5e:64:5c:4d", "g7:9D:67:Cd:b0:9E"]}
+{"requirement": "提取中文词语组合。", "regex": "([一-龥]{3,5})", "flags": "i", "positive": ["迌摠疦幟", "镛毄蹱", "湩籖灙合"], "negative": ["分", "hello123", "中x"]}
+{"requirement": "提取符合标准格式的日期字符串", "regex": "(?:\\d{4}\\-\\d{2}\\-\\d{2})", "flags": "", "positive": ["2024-03-14", "2024-11-02", "2024-12-31"], "negative": ["2024-3-14", "20240314", "14-03-2024"]}
+{"requirement": "提取相对路径字符串。", "regex": "\\.{1,2}/[\\w./-]+", "flags": "", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "提取相对路径，如 ./lib/utils.py", "regex": "(\\.{1,2}/[\\w./-]+)", "flags": "i", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "提取SQL字符串字面量。", "regex": "'[^']*'", "flags": "", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "识别日期格式", "regex": "\\d{4}\\.\\d{2}\\.\\d{2}", "flags": "", "positive": ["2025.03.14", "2025.11.02", "2025.12.31"], "negative": ["2025.3.14", "20240314", "14.03.2025"]}
+{"requirement": "验证密码含大小写字母和数字，如Abcdef12。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "m", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "匹配标准MAC地址格式。", "regex": "^([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2}$", "flags": "m", "positive": ["27-eb-0d-1c-Ab-7c", "2b-70-a3-Ea-44-19", "f4-fe-D0-20-86-4B"], "negative": ["De-23-fD-B0-EA", "g7-d3-97-93-17-dE"]}
+{"requirement": "提取 git 短哈希，如 abc1234", "regex": "(?P<num>\\b[0-9a-f]{7,40}\\b)", "flags": "", "positive": ["commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["123456", "xyzabcd", "g123456"]}
+{"requirement": "匹配标准的车牌号格式。", "regex": "^[京津沪粤苏浙][A-Z][A-Z0-9]{5}$", "flags": "", "positive": ["粤A77272", "京FB450B", "浙E806B3"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "验证密码是否包含大小写字母和数字。", "regex": "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16})", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "识别单个标签，如 <i>it</i>，不匹配非标签内容。", "regex": "<.+?>", "flags": "m", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "识别相对路径格式。", "regex": "\\.{1,2}/[\\w./-]+", "flags": "m", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "匹配包含时分的格式时间", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "提取格式为YYYY/MM/DD的日期。", "regex": "\\d{4}/\\d{2}/\\d{2}", "flags": "", "positive": ["2024/03/14", "2024/11/02", "2024/12/31"], "negative": ["2024/3/14", "20240314", "14/03/2024"]}
+{"requirement": "匹配十六进制颜色码。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "m", "positive": ["#44FEdA", "#2bC9e8", "#e0b722"], "negative": ["#1bFB6", "F70Ddf", "#GGGGGG", "#6DeDA943"]}
+{"requirement": "匹配经纬度坐标，如 31.2304, 121.4737。", "regex": "-?\\d{1,2}\\.\\d{4,},\\s*-?\\d{1,3}\\.\\d{4,}", "flags": "", "positive": ["31.2304, 121.4737 上海", "坐标 39.9042,116.4074", "-33.8688, 151.2093"], "negative": ["31.23, 121.47", "经纬 31 度", "31.2304 单值"]}
+{"requirement": "识别时间格式或电子邮箱地址。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?|[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "", "positive": ["9:05", "23:59", "0:00", "team_dev@example.com", "contact@example.com", "bob.wu@api.io"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "匹配电子邮箱地址，如 user01@mail.cn", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}|-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "i", "positive": ["user01@mail.cn", "bob.wu@mail.cn", "contact@mail.cn", "3.14e10", "-2E-5", "1e3"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
+{"requirement": "识别命令行单字母短选项。", "regex": "\\s-[a-zA-Z]\\b", "flags": "", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "提取SQL语句中的字符串字面量内容。", "regex": "'[^']*'", "flags": "", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "匹配命令行长选项，如 --extra dev", "regex": "--[a-z][a-z0-9-]{2,}", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "匹配时间格式，如 23:59", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "提取Markdown代码片段，如`uv sync`", "regex": "`[^`]+`", "flags": "m", "positive": ["运行 `uv sync` 即可", "看 `cli.py` 文件", "命令 `ls -l` 输出"], "negative": ["普通命令", "``", "无代码"]}
+{"requirement": "验证密码是否符合强度要求。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "i", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "设置强密码规则。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "i", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "匹配git短哈希值。", "regex": "(?:\\b[0-9a-f]{7,40}\\b)", "flags": "", "positive": ["commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["123456", "xyzabcd", "g123456"]}
+{"requirement": "提取HTTP状态行中的状态码", "regex": "HTTP/1\\.[01] \\d{3}", "flags": "", "positive": ["HTTP/1.1 200 OK", "响应 HTTP/1.0 404 未找到", "HTTP/1.1 500 错误"], "negative": ["200 OK", "HTTP 200", "HTTP/2 200"]}
+{"requirement": "匹配HTML标签，如<b>bold</b>。", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "匹配独立的error单词", "regex": "\\berror\\b", "flags": "i", "positive": ["error", "ERROR", "start error end"], "negative": ["myerror", "errors", "errorx"]}
+{"requirement": "识别中国大陆车牌号。", "regex": "(?P<num>[京津沪粤苏浙][A-Z][A-Z0-9]{5})", "flags": "i", "positive": ["津A02192", "浙B7A858", "沪D1CA29"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "识别命令行短选项。", "regex": "(\\s-[a-zA-Z]\\b)", "flags": "i", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "识别科学计数法表示的数字。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "m", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
+{"requirement": "识别命令行中的单字母短选项", "regex": "\\s-[a-zA-Z]\\b", "flags": "", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "提取JSON中的数字值。", "regex": ":\\s*-?\\d+(?:\\.\\d+)?\\b", "flags": "m", "positive": ["{\"count\": 42}", "{\"price\": -3.5 有", "{\"id\":100}"], "negative": ["{\"name\": \"abc\"}", "冒号: abc", "no json"]}
+{"requirement": "匹配命令行中的长选项参数。", "regex": "(?:--[a-z][a-z0-9-]{2,})", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "提取全角数字组合。", "regex": "[０-９]{2,}", "flags": "", "positive": ["编号１２３４", "房间 ０５ 室", "电话０８６"], "negative": ["12345", "一百分", "abc"]}
+{"requirement": "匹配科学计数法，如 -2E-5", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
+{"requirement": "识别软件版本号格式。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
+{"requirement": "识别命令行短选项参数。", "regex": "\\s-[a-zA-Z]\\b", "flags": "", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "识别日志等级，如[INFO]。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[INFO] request handled", "2024-01-01 [INFO] done", "server [INFO] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
+{"requirement": "提取电子邮箱地址", "regex": "[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}", "flags": "i", "positive": ["contact@example.com", "team_dev@api.io", "alice@example.com"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
+{"requirement": "提取符合规范的cron表达式", "regex": "(\\d{1,2} |\\* ){4}(\\d{1,2}|\\*)", "flags": "m", "positive": ["0 8 * * * 任务", "30 4 1 * * 备份", "15 2 3 4 5 触发"], "negative": ["* * 不好", "0 8 *", "cron 表达式"]}
+{"requirement": "提取中国大陆手机号码", "regex": "1[3-9]\\d{9}", "flags": "i", "positive": ["18253941854", "17541892588", "15140035630"], "negative": ["3282673549", "047986571689", "26213250862", "1386856434"]}
+{"requirement": "匹配标准日期格式字符串。", "regex": "\\d{4}\\.\\d{2}\\.\\d{2}", "flags": "", "positive": ["2025.03.14", "2025.11.02", "2025.12.31"], "negative": ["2025.3.14", "20240314", "14.03.2025"]}
+{"requirement": "匹配格式为小时:分钟的时间字符串，如 9:05 或 0:00。", "regex": "^\\d{1,2}:\\d{2}(:\\d{2})?$", "flags": "i", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "识别Markdown行内代码", "regex": "(?:`[^`]+`)", "flags": "", "positive": ["运行 `uv sync` 即可", "看 `cli.py` 文件", "命令 `ls -l` 输出"], "negative": ["普通命令", "``", "无代码"]}
+{"requirement": "匹配标准MAC地址格式", "regex": "(([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2})", "flags": "", "positive": ["54:18:20:d9:Cc:1e", "5c:a5:1F:38:Ae:d1", "Dd:e7:e5:b1:1C:75"], "negative": ["1c:Cc:E3:Fa:BA", "g7:ac:D6:51:b0:db"]}
+{"requirement": "匹配长命令选项，如 --verbose 输出", "regex": "(?:--[a-z][a-z0-9-]{2,})", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "匹配命令行中长选项参数。", "regex": "--[a-z][a-z0-9-]{2,}", "flags": "m", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "匹配经纬度坐标，如 31.2304, 121.4737", "regex": "-?\\d{1,2}\\.\\d{4,},\\s*-?\\d{1,3}\\.\\d{4,}", "flags": "i", "positive": ["31.2304, 121.4737 上海", "坐标 39.9042,116.4074", "-33.8688, 151.2093"], "negative": ["31.23, 121.47", "经纬 31 度", "31.2304 单值"]}
+{"requirement": "匹配版本号，不识别简单数字或无效格式。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "i", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
+{"requirement": "识别命令行中的长选项参数。", "regex": "--[a-z][a-z0-9-]{2,}", "flags": "m", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "匹配命令行短选项，如 -l 或 -f", "regex": "\\s-[a-zA-Z]\\b", "flags": "i", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "匹配全角数字组成的编号。", "regex": "(?P<item>[０-９]{2,})", "flags": "", "positive": ["编号１２３４", "房间 ０５ 室", "电话０８６"], "negative": ["12345", "一百分", "abc"]}
+{"requirement": "识别标准时间格式。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "m", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "验证密码强度，必须包含大小写字母和数字。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "匹配Markdown行内代码格式", "regex": "(?:`[^`]+`)", "flags": "", "positive": ["运行 `uv sync` 即可", "看 `cli.py` 文件", "命令 `ls -l` 输出"], "negative": ["普通命令", "``", "无代码"]}
+{"requirement": "识别相对路径的文件引用。", "regex": "\\.{1,2}/[\\w./-]+", "flags": "", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "匹配日期格式", "regex": "\\d{4}\\-\\d{2}\\-\\d{2}", "flags": "", "positive": ["2025-03-14", "2025-11-02", "2025-12-31"], "negative": ["2025-3-14", "20240314", "14-03-2025"]}
+{"requirement": "匹配由3到5个汉字组成的词语。", "regex": "(?:[一-龥]{3,5})", "flags": "i", "positive": ["澦紥岉昒", "吝眊麶", "崣鷄鏐"], "negative": ["矴", "hello123", "中x"]}
+{"requirement": "提取符合格式的MAC地址", "regex": "(?P<value>([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2})", "flags": "", "positive": ["EE-9F-A7-e4-cB-ef", "C7-AF-AC-8D-25-Ad", "e5-Af-f8-fB-cD-21"], "negative": ["3a-f7-2F-A1-40", "g7-ec-5D-cD-ca-59"]}
+{"requirement": "匹配18位身份证号码。", "regex": "^\\d{17}[\\dXx]$", "flags": "", "positive": ["102707903202041792", "911179931365651982", "530925114262582739"], "negative": ["0219620710021946", "723248763290927914Y", "56083318195883734"]}
+{"requirement": "匹配包含货币符号和金额的数字格式。", "regex": "(?:[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?)", "flags": "", "positive": ["$199", "¥1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "匹配时间格式的小时分钟秒。", "regex": "(?:\\d{1,2}:\\d{2}(:\\d{2})?)", "flags": "m", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "匹配以.png、.jpg、.gif结尾的文件名。", "regex": "(?P<item>[\\w.-]+\\.(png|jpg|gif))", "flags": "", "positive": ["img_v2.jpg", "img_v2.jpg", "img_v2.jpg"], "negative": ["readme.md", "archive.zip", "noext", ".png"]}
+{"requirement": "从文本中提取总价数字，如总价: 99.50", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "提取带有货币符号的金额，如$199或¥1,299", "regex": "(?:[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?)", "flags": "i", "positive": ["$199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "匹配科学计数法，需包含指数部分", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
+{"requirement": "识别车牌号，如沪F2B6C6。", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "", "positive": ["沪F2B6C6", "京D97968", "苏GB680C"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "解析包含小时分钟秒的时长格式。", "regex": "(\\d+h)?(\\d+m)(\\d+s)?", "flags": "", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
+{"requirement": "识别24小时制的时间格式。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "i", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "提取时长，如 1h30m 或 45m20s。", "regex": "(\\d+h)?(\\d+m)(\\d+s)?", "flags": "m", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
+{"requirement": "提取git提交的简短哈希值", "regex": "\\b[0-9a-f]{7,40}\\b", "flags": "m", "positive": ["commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["123456", "xyzabcd", "g123456"]}
+{"requirement": "识别小时分钟格式的文本时间", "regex": "(\\d{1,2}:\\d{2}(:\\d{2})?)", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "匹配git短哈希", "regex": "\\b[0-9a-f]{7,40}\\b", "flags": "", "positive": ["commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["123456", "xyzabcd", "g123456"]}
+{"requirement": "提取SQL字符串字面量，如'张三'。", "regex": "'[^']*'", "flags": "", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "提取时间格式。", "regex": "^\\d{1,2}:\\d{2}(:\\d{2})?$", "flags": "i", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "匹配中文词语，如淘髾擴攲", "regex": "([一-龥]{4,6})", "flags": "i", "positive": ["淘髾擴攲", "赛嵋硸奧", "膧靸羗舫"], "negative": ["绎", "hello123", "中x"]}
+{"requirement": "提取总价后的数字", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "匹配命令行短选项参数。", "regex": "\\s-[a-zA-Z]\\b", "flags": "m", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "匹配时间格式，如小时:分钟:秒。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "i", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "验证密码是否包含大小写字母和数字且长度 8-16 位", "regex": "(?P<num>(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16})", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "匹配常见图片格式的文件名。", "regex": "[\\w.-]+\\.(jpg|gif|jpeg)", "flags": "", "positive": ["shot-2024.jpeg", "logo.jpeg", "shot-2024.jpeg"], "negative": ["readme.md", "archive.zip", "noext", ".png"]}
+{"requirement": "匹配中国大陆的车牌号码格式。", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "i", "positive": ["浙D729A4", "浙D671AC", "京D8B4B5"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "匹配十六进制颜色代码。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "i", "positive": ["#86EB84", "#E9DB2A", "#E5CC45"], "negative": ["#FDDaC", "1021EC", "#GGGGGG", "#8E6CdDE0"]}
+{"requirement": "识别时间格式如小时和分钟", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?|-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "m", "positive": ["9:05", "23:59", "0:00", "3.14e10", "-2E-5", "1e3"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "匹配相对路径，如 ./lib/utils.py", "regex": "\\.{1,2}/[\\w./-]+", "flags": "", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "匹配包含相对路径的字符串。", "regex": "\\.{1,2}/[\\w./-]+", "flags": "", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "匹配标准MAC地址格式，如 96:88:1e:0A:0d:E6", "regex": "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}", "flags": "", "positive": ["96:88:1e:0A:0d:E6", "27:Ca:DE:97:ae:BE", "8a:D0:f6:34:A5:2E"], "negative": ["88:fB:AC:6e:Ee", "g7:5c:9E:43:FA:2a"]}
+{"requirement": "匹配SQL字符串，如WHERE name='张三'。", "regex": "'[^']*'", "flags": "i", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "匹配HTTP状态行格式，不匹配其他格式。", "regex": "HTTP/1\\.[01] \\d{3}", "flags": "", "positive": ["HTTP/1.1 200 OK", "响应 HTTP/1.0 404 未找到", "HTTP/1.1 500 错误"], "negative": ["200 OK", "HTTP 200", "HTTP/2 200"]}
+{"requirement": "识别标准的十六进制颜色码。", "regex": "#[0-9a-fA-F]{6}\\b", "flags": "", "positive": ["#deb022", "#b64Ee0", "#6939ef"], "negative": ["#acBAF", "d6f27e", "#GGGGGG", "#CCBf0A0a"]}
+{"requirement": "验证密码包含大小写和数字。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "m", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "匹配中国大陆车牌号码格式。", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "", "positive": ["粤D8705B", "苏G0791C", "京FCC6A5"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "匹配独立单词failed。", "regex": "(?P<item>\\bfailed\\b)", "flags": "i", "positive": ["failed", "FAILED", "start failed end"], "negative": ["myerror", "errors", "failedx"]}
+{"requirement": "匹配中国大陆手机号码格式。", "regex": "1[3-9]\\d{9}", "flags": "", "positive": ["17474176434", "17105794065", "15532932444"], "negative": ["8345199550", "897754728157", "20662501622", "1304377149"]}
+{"requirement": "匹配命令行短选项，如-l。", "regex": "\\s-[a-zA-Z]\\b|:\\d{2,5}\\b", "flags": "", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索", "服务 localhost:8080 运行", "连接 db:5432 成功", "端口 :3000 开放"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "识别金额的货币符号和数字格式。", "regex": "([¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?)", "flags": "", "positive": ["$199", "$1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "识别科学计数法，如3.14e10", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
 {"requirement": "提取带引号的字符串内容。", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "匹配金额，包含货币符号和小数。", "regex": "(?P<num>[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?)", "flags": "", "positive": ["$199", "$1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "提取带引号的字符串内容。", "regex": "\"[^\"]+\"", "flags": "i", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "确保密码包含大小写字母和数字。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "m", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "提取包含小时、分钟和秒的时长表达式。", "regex": "(?P<value>(\\d+h)?(\\d+m)(\\d+s)?)", "flags": "", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
-{"requirement": "识别以京津沪粤苏浙开头的车牌号格式", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "i", "positive": ["津C86794", "津F36447", "京B63276"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
-{"requirement": "确保密码包含大小写字母和数字且长度合适。", "regex": "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16})", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
-{"requirement": "识别金额格式是否正确。", "regex": "^[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?$", "flags": "", "positive": ["$199", "$1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
-{"requirement": "匹配六位十六进制颜色代码，如#13cEfa", "regex": "(#[0-9a-fA-F]{6}\\b)", "flags": "", "positive": ["#13cEfa", "#DDF710", "#278E29"], "negative": ["#1bEB1", "cEf0C2", "#GGGGGG", "#88db9A80"]}
-{"requirement": "识别符合MAC地址格式的字符串。", "regex": "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}", "flags": "m", "positive": ["31:cC:Bf:41:b0:d2", "9F:ED:f6:30:65:E9", "2f:39:cf:fF:82:EB"], "negative": ["78:C1:4F:32:Fb", "g7:bc:b5:e1:8e:e8"]}
-{"requirement": "提取带引号的字符串内容并标记", "regex": "(?P<num>\"[^\"]+\")", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
-{"requirement": "匹配4到6个汉字的词语", "regex": "[一-龥]{4,6}", "flags": "", "positive": ["埵嗯軿弪憆蜫", "破瑧蜸蟛鹔", "负烀綡鞆攇"], "negative": ["絚", "hello123", "中x"]}
-{"requirement": "提取单个HTML标签，如<b>bold</b>", "regex": "<.+?>", "flags": "m", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
-{"requirement": "匹配HTML标签内容。", "regex": "<.+?>", "flags": "m", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "匹配科学计数法，如 -2E-5", "regex": "(-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
+{"requirement": "提取总价数字。", "regex": "(?<=总价: )\\d{1,6}(\\.\\d{2})?", "flags": "i", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "提取 SQL 单引号字符串，如 '张三'", "regex": "(?:'[^']*')", "flags": "m", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "匹配金额，如$12,345.67。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "m", "positive": ["¥199", "$1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "识别全角数字组成的编号。", "regex": "[０-９]{2,}", "flags": "i", "positive": ["编号１２３４", "房间 ０５ 室", "电话０８６"], "negative": ["12345", "一百分", "abc"]}
+{"requirement": "识别符合标准的车牌号码。", "regex": "[京津沪粤苏浙][A-Z][A-Z0-9]{5}", "flags": "", "positive": ["浙E12878", "苏F48B6C", "苏E96988"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "匹配HTML标签。", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "识别科学计数法表示的数字。", "regex": "-?\\d+(\\.\\d+)?[eE][+-]?\\d+", "flags": "", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
+{"requirement": "识别相对路径格式", "regex": "\\.{1,2}/[\\w./-]+", "flags": "i", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "识别有效的URL地址", "regex": "(?:https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?)", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
+{"requirement": "识别命令行中的长选项参数。", "regex": "--[a-z][a-z0-9-]{2,}", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "匹配版本号中的数字和标签。", "regex": "v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?", "flags": "", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
+{"requirement": "匹配标准的cron表达式格式。", "regex": "(?:(\\d{1,2} |\\* ){4}(\\d{1,2}|\\*))", "flags": "i", "positive": ["0 8 * * * 任务", "30 4 1 * * 备份", "15 2 3 4 5 触发"], "negative": ["* * 不好", "0 8 *", "cron 表达式"]}
+{"requirement": "从文本中提取总价后的数字。", "regex": "((?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "提取总价数值信息。", "regex": "(?P<data>(?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "匹配时长格式如小时分钟秒", "regex": "(?P<value>(\\d+h)?(\\d+m)(\\d+s)?)", "flags": "", "positive": ["90m", "1h30m", "45m20s"], "negative": ["1.5h", "m30", "30", "hm"]}
+{"requirement": "验证金额格式的数字", "regex": "^[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?$", "flags": "", "positive": ["$199", "¥1,299", "$12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "提取十六进制颜色码。", "regex": "(?P<data>#[0-9a-fA-F]{6}\\b)", "flags": "", "positive": ["#1D0CA5", "#8a1EA3", "#8dF9e1"], "negative": ["#46d0e", "93f1d0", "#GGGGGG", "#55b5aa6F"]}
+{"requirement": "匹配带双引号的字符串", "regex": "(?P<data>\"[^\"]+\")", "flags": "i", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
+{"requirement": "提取带双引号的字符串内容", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
+{"requirement": "提取标准颜色码", "regex": "^#[0-9a-fA-F]{6}\\b$", "flags": "m", "positive": ["#984D84", "#cfE0AB", "#1b12a3"], "negative": ["#7eFAF", "d5dA8D", "#GGGGGG", "#e19482dC"]}
+{"requirement": "匹配HTML标签内容。", "regex": "(?:<.+?>)", "flags": "i", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "匹配科学计数法表示的数字，如 3.14e10。", "regex": "(-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "i", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
+{"requirement": "匹配命令行中的单个短选项。", "regex": "\\s-[a-zA-Z]\\b", "flags": "m", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "识别 JSON 数字值，如 \"price\": -3.5", "regex": ":\\s*-?\\d+(?:\\.\\d+)?\\b", "flags": "", "positive": ["{\"count\": 42}", "{\"price\": -3.5 有", "{\"id\":100}"], "negative": ["{\"name\": \"abc\"}", "冒号: abc", "no json"]}
+{"requirement": "识别命令行短选项参数。", "regex": "\\s-[a-zA-Z]\\b", "flags": "", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "匹配带引号的字符串", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
+{"requirement": "识别HTTP状态行格式。", "regex": "HTTP/1\\.[01] \\d{3}", "flags": "", "positive": ["HTTP/1.1 200 OK", "响应 HTTP/1.0 404 未找到", "HTTP/1.1 500 错误"], "negative": ["200 OK", "HTTP 200", "HTTP/2 200"]}
+{"requirement": "匹配独立的failed单词。", "regex": "(?P<key>\\bfailed\\b)", "flags": "i", "positive": ["failed", "FAILED", "start failed end"], "negative": ["myerror", "errors", "failedx"]}
+{"requirement": "密码需包含大小写字母和数字，长度8-16位。", "regex": "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])\\w{8,16}", "flags": "", "positive": ["Abcdef12", "Passw0rd123", "xY9zzzzz"], "negative": ["abcdefgh", "ABCDEFGH", "Abc12"]}
+{"requirement": "提取符合规范的cron表达式", "regex": "(\\d{1,2} |\\* ){4}(\\d{1,2}|\\*)", "flags": "", "positive": ["0 8 * * * 任务", "30 4 1 * * 备份", "15 2 3 4 5 触发"], "negative": ["* * 不好", "0 8 *", "cron 表达式"]}
+{"requirement": "匹配版本号格式字符串。", "regex": "(v?\\d+\\.\\d+(\\.\\d+)?(-[a-zA-Z0-9]+)?)", "flags": "m", "positive": ["1.2", "v2.0.1", "3.4.5-beta"], "negative": ["1", "v1", "1..2", "a.b.c"]}
+{"requirement": "匹配HTTP状态行。", "regex": "HTTP/1\\.[01] \\d{3}", "flags": "", "positive": ["HTTP/1.1 200 OK", "响应 HTTP/1.0 404 未找到", "HTTP/1.1 500 错误"], "negative": ["200 OK", "HTTP 200", "HTTP/2 200"]}
+{"requirement": "匹配HTML标签，如 <b>bold</b>", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "匹配相对路径字符串。", "regex": "(\\.{1,2}/[\\w./-]+)", "flags": "", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "识别Git提交的简短哈希值。", "regex": "\\b[0-9a-f]{7,40}\\b", "flags": "m", "positive": ["commit 8988603 已合", "sha e61564f9c2 提交", "hash abc1234"], "negative": ["123456", "xyzabcd", "g123456"]}
+{"requirement": "识别标准的MAC地址格式。", "regex": "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}", "flags": "i", "positive": ["aD:a5:cD:9C:aA:AB", "fC:9f:0b:aF:3d:C9", "E0:Df:8E:CC:71:Cf"], "negative": ["0e:ad:4d:6d:AD", "g7:ED:c4:F7:1C:36"]}
+{"requirement": "匹配带货币符号的金额格式。", "regex": "([¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?)", "flags": "", "positive": ["¥199", "$1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "匹配中国大陆手机号码。", "regex": "1[3-9]\\d{9}", "flags": "", "positive": ["19004587242", "15749665294", "19305171972"], "negative": ["5123433536", "757777342658", "27503104979", "1314077128"]}
+{"requirement": "验证中国大陆手机号", "regex": "1[3-9]\\d{9}", "flags": "i", "positive": ["15566212867", "13632346729", "19493874302"], "negative": ["7169385977", "790147546926", "23296762916", "1303248413"]}
+{"requirement": "提取全角数字组合。", "regex": "[０-９]{2,}", "flags": "m", "positive": ["编号１２３４", "房间 ０５ 室", "电话０８６"], "negative": ["12345", "一百分", "abc"]}
+{"requirement": "识别符合时间格式的字符串。", "regex": "\\d{1,2}:\\d{2}(:\\d{2})?", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}
+{"requirement": "识别中国大陆手机号码格式。", "regex": "(?P<item>1[3-9]\\d{9})", "flags": "i", "positive": ["15485736540", "17492728090", "15178836431"], "negative": ["6785984440", "889593032075", "26052699015", "1323029996"]}
+{"requirement": "提取HTML标签内容。", "regex": "(<.+?>)", "flags": "m", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "提取总价数值", "regex": "(?P<value>(?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "匹配JSON中的数字值", "regex": ":\\s*-?\\d+(?:\\.\\d+)?\\b", "flags": "", "positive": ["{\"count\": 42}", "{\"price\": -3.5 有", "{\"id\":100}"], "negative": ["{\"name\": \"abc\"}", "冒号: abc", "no json"]}
+{"requirement": "提取HTTP状态行，忽略非标准格式。", "regex": "HTTP/1\\.[01] \\d{3}", "flags": "", "positive": ["HTTP/1.1 200 OK", "响应 HTTP/1.0 404 未找到", "HTTP/1.1 500 错误"], "negative": ["200 OK", "HTTP 200", "HTTP/2 200"]}
+{"requirement": "匹配命令行中的长选项。", "regex": "--[a-z][a-z0-9-]{2,}", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "提取SQL字符串字面量。", "regex": "'[^']*'", "flags": "", "positive": ["WHERE name='张三' 结束", "值 'abc123' 存入", "SET x='a b'"], "negative": ["name=张三", "\"双引号\"", "'未闭合"]}
+{"requirement": "提取由两个到四个中文字符组成的词语。", "regex": "(?P<data>[一-龥]{2,4})", "flags": "", "positive": ["歵穥", "睿坋", "含帐淐"], "negative": ["廧", "hello123", "中x"]}
+{"requirement": "提取相对路径中的文件或目录", "regex": "\\.{1,2}/[\\w./-]+", "flags": "", "positive": ["引入 ./lib/utils.py", "配置 ../config.yml 读取", "走 ./a/b/c 路径"], "negative": ["/usr/bin", "C:\\x", "相对 plain"]}
+{"requirement": "匹配命令行的长选项参数。", "regex": "(--[a-z][a-z0-9-]{2,})", "flags": "", "positive": ["uv sync --extra dev", "--verbose 输出", "git log --oneline 简洁"], "negative": ["单横线 -x", "-- 无字", "a--b"]}
+{"requirement": "提取两个到四个中文字符组成的词语", "regex": "[一-龥]{2,4}", "flags": "", "positive": ["钾吤瞅蹩", "暷衟蛷齧", "气竇炰"], "negative": ["啔", "hello123", "中x"]}
+{"requirement": "命令行中识别单个字母选项参数", "regex": "\\s-[a-zA-Z]\\b", "flags": "i", "positive": ["ls -l 显示", "rm -f 强制", "grep -i 搜索"], "negative": ["ls --all", "a-b 连字符", "无flag"]}
+{"requirement": "匹配单词success，如start success end。", "regex": "\\bsuccess\\b", "flags": "i", "positive": ["success", "SUCCESS", "start success end"], "negative": ["myerror", "errors", "successx"]}
+{"requirement": "提取日志中的等级标记", "regex": "(\\[(INFO|WARN|ERROR|DEBUG)\\])", "flags": "", "positive": ["[ERROR] request handled", "2024-01-01 [ERROR] done", "server [ERROR] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
+{"requirement": "匹配带双引号的字符串。", "regex": "\"[^\"]+\"", "flags": "", "positive": ["\"hello\"", "\"a b c\"", "\"json_key\""], "negative": ["hello", "\"unterminated", "\"\""]}
+{"requirement": "识别日志中的INFO/WARN/ERROR级别。", "regex": "\\[(INFO|WARN|ERROR|DEBUG)\\]", "flags": "", "positive": ["[WARN] request handled", "2024-01-01 [WARN] done", "server [WARN] ok"], "negative": ["[info] x", "[TRACE] y", "INFO z", "[INFOWARN]"]}
+{"requirement": "提取总价信息，如总价: 12800或总价: 99.50", "regex": "(?P<key>(?<=总价: )\\d{1,6}(\\.\\d{2})?)", "flags": "m", "positive": ["总价: 12800", "总价: 99.50", "账单 总价: 3000"], "negative": ["12800", "价格: 12800", "总价 12800"]}
+{"requirement": "提取包含三个到五个汉字的中文词语。", "regex": "(?:[一-龥]{3,5})", "flags": "", "positive": ["棤躵澼鑶辀", "芜桉鄷僬", "倩譏脅"], "negative": ["堥", "hello123", "中x"]}
+{"requirement": "提取带符号的金额数值，如¥199或$1,299。", "regex": "[¥$]\\d{1,3}(,\\d{3})*(?:\\.\\d{2})?", "flags": "", "positive": ["¥199", "¥1,299", "¥12,345.67"], "negative": ["199", "¥", "cost: $", "￥199"]}
+{"requirement": "提取十六进制颜色代码，如#e1Fc8B。", "regex": "(#[0-9a-fA-F]{6}\\b)", "flags": "", "positive": ["#e1Fc8B", "#beCdAB", "#c6EF25"], "negative": ["#81eFD", "09E9BF", "#GGGGGG", "#27BFA3C1"]}

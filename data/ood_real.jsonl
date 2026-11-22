@@ -1,0 +1,20 @@
+{"requirement": "匹配微信号（字母开头，6-20位字母数字下划线）", "regex": "^[a-zA-Z][a-zA-Z0-9_]{5,19}$", "flags": "", "positive": ["wxid_abc123", "Alice2008", "a12345"], "negative": ["123abc", "ab", "aaaaaaaaaaaaaaaaaaaaa", "微信 abc"]}
+{"requirement": "匹配QQ号（5-11位纯数字，首位不为0）", "regex": "^[1-9]\\d{4,10}$", "flags": "", "positive": ["12345", "987654321", "10001"], "negative": ["01234", "1234", "123456789012", "12345a"]}
+{"requirement": "匹配中国邮政编码（6位数字）", "regex": "^\\d{6}$", "flags": "", "positive": ["200000", "100010", "518000"], "negative": ["20000", "2000000", "abc123"]}
+{"requirement": "匹配驼峰命名的变量名（如 getUserById）", "regex": "\\b[a-z]+[A-Z][a-zA-Z]*\\b", "flags": "", "positive": ["getUserById 和 fetchData", "myVarName", "调用 parseJson 完毕"], "negative": ["getuser", "GetUser", "USER_ID"]}
+{"requirement": "匹配 Markdown 超链接（[文字](地址) 形式）", "regex": "\\[[^\\]]+\\]\\([^)]+\\)", "flags": "", "positive": ["见 [文档](https://a.com) 说明", "[点这](http://b.org/x)", "参考 [论文](/files/p.pdf)"], "negative": ["普通文本", "[]()", "http://bare.link"]}
+{"requirement": "匹配 HTML 标签", "regex": "</?[a-zA-Z][^>]*>", "flags": "", "positive": ["<div class='x'>内容</div>", "换行<br>标签", "<a href=\"u\">link</a>"], "negative": ["a < b", "<>文本", "没有标签"]}
+{"requirement": "匹配 Windows 文件路径（如 C:\\Users\\test）", "regex": "[A-Za-z]:\\\\(?:[\\w .-]+\\\\)*[\\w .-]+", "flags": "", "positive": ["打开 C:\\Users\\jack\\doc.txt", "D:\\backup\\2024", "E:\\a b\\c.txt"], "negative": ["usr/local/bin", "C:", "\\\\server\\share"]}
+{"requirement": "匹配带 +86 前缀的手机号", "regex": "(?:\\+?86)?1[3-9]\\d{9}", "flags": "", "positive": ["+8613812345678", "8615912345678", "17612345678"], "negative": ["+85212345678", "12345678901", "+8612345678"]}
+{"requirement": "匹配 Markdown 标题行（# 开头）", "regex": "^#{1,6}\\s+.+", "flags": "m", "positive": ["# 一级标题\n正文", "## 二级\n内容", "### 深层标题 ok"], "negative": ["#无空格", "正文 # 不是标题", "####### 七个井号"]}
+{"requirement": "匹配 CSV 中的带引号字段", "regex": "\"[^\"]*\"", "flags": "", "positive": ["a,\"quoted\",b", "name,\"张三,带逗号\",age", "x,\"y\""], "negative": ["a,b,c", "plain", "'single'"]}
+{"requirement": "匹配百分数（如 85%、12.5%）", "regex": "\\d+(?:\\.\\d+)?%", "flags": "", "positive": ["通过率 85%", "误差 12.5%以内", "100%"], "negative": ["百分之五十", "85", "%"]}
+{"requirement": "匹配温度值（如 36.5°C 或 98°F）", "regex": "-?\\d+(?:\\.\\d+)?\\s*°[CF]", "flags": "", "positive": ["体温 36.5°C", "今天 98°F 热", "降到了 -5°C"], "negative": ["36.5 度", "°C", "36.5K"]}
+{"requirement": "匹配时区写法（如 UTC+08:00）", "regex": "UTC[+-]\\d{2}:\\d{2}", "flags": "", "positive": ["时间 UTC+08:00 开盘", "UTC-05:00 纽约", "log ts UTC+00:00"], "negative": ["GMT+8", "UTC+8", "UTC08:00"]}
+{"requirement": "匹配中文姓名（2-4个汉字）", "regex": "^[\\u4e00-\\u9fa5]{2,4}$", "flags": "", "positive": ["张伟", "欧阳娜娜", "王小明"], "negative": ["张", "Andrew", "李a", "诸葛孔明亮亮"]}
+{"requirement": "匹配 bash 变量引用（$VAR 或 ${VAR}）", "regex": "\\$\\{?[a-zA-Z_][a-zA-Z0-9_]*\\}?", "flags": "", "positive": ["echo $HOME/path", "值是 ${MY_VAR} 这里", "用 $PATH 和 ${PATH2}"], "negative": ["价格 100 美元", "cost: 5 dollars", "美元$"]}
+{"requirement": "匹配 UUID（标准 8-4-4-4-12 十六进制）", "regex": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", "flags": "i", "positive": ["550e8400-e29b-41d4-a716-446655440000", "12345678-1234-1234-1234-123456789abc", "abcdef01-2345-6789-abcd-ef0123456789"], "negative": ["550e8400-e29b-41d4", "not-a-uuid", "gggggggg-1234-1234-1234-123456789abc"]}
+{"requirement": "匹配 emoji 表情符号", "regex": "[🌀-🫿]", "flags": "", "positive": ["收到😀了", "🎉 开工大吉", "🚀发射"], "negative": ["纯文本 abc", "汉字而已", "符号 +-*/"]}
+{"requirement": "匹配重复出现的单词（如 the the）", "regex": "\\b(\\w+)\\s+\\1\\b", "flags": "i", "positive": ["this is is a test", "the the problem", "很 很 好的"], "negative": ["normal text here", "the them", "word wordly"]}
+{"requirement": "匹配 SQL 行注释（-- 开头到行尾）", "regex": "--.*$", "flags": "m", "positive": ["SELECT 1 -- 取一个", "-- 全行注释\nSELECT", "WHERE x=1 --条件"], "negative": ["SELECT 1", "单横线-注释", "无注释行"]}
+{"requirement": "匹配简单 IPv6 地址（完整 8 组形式）", "regex": "(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}", "flags": "", "positive": ["2001:0db8:85a3:0000:0000:8a2e:0370:7334", "1:2:3:4:5:6:7:8", "fe80:0:0:0:0:0:0:1"], "negative": ["192.168.1.1", "::1", "1:2:3:4:5:6:7"]}

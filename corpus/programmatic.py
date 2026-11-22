@@ -16,6 +16,7 @@ import re
 from collections.abc import Callable
 from typing import Any
 
+from corpus.extra_scenarios import EXTRA_GENERATORS
 from corpus.validate import validate_sample
 
 Atom = tuple[str, list[str], list[str], set[str]]  # (regex, positive, negative, features)
@@ -298,3 +299,6 @@ def generate_atoms(count: int, seed: int = 42) -> list[dict[str, Any]]:
             out.append(sample)
     print(f"程序化原子: {len(out)}/{count} | 特性覆盖 {sorted(feature_coverage)}")
     return out
+
+
+ATOM_GENERATORS = ATOM_GENERATORS + EXTRA_GENERATORS

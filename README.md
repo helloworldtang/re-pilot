@@ -28,7 +28,8 @@ uv run python cli.py "匹配中国大陆手机号" --test "13812345678"
 | 底座裸跑 | 22% | 0.9s |
 | **蒸馏版** | **91%** | 1.0s |
 
-蒸馏增益 +69pp，完全离线。实验全记录见 [docs/experiment.md](docs/experiment.md)。
+蒸馏增益 +69pp，完全离线。实验全记录见 [docs/experiment.md](docs/experiment.md)，
+业界蒸馏路径全景与本项目的点亮情况见 [docs/distillation-map.md](docs/distillation-map.md)。
 
 ## 结构
 

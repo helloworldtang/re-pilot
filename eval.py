@@ -37,14 +37,18 @@ def run_eval(model_path: str, adapter: str | None, eval_path: str, limit: int) -
     fail_reasons: list[str] = []
     durations = 0.0
     for row in rows:
-        text = tokenizer.apply_chat_template(  # type: ignore[no-untyped-call]
-            [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": row["requirement"]},
-            ],
-            tokenize=False,
-            add_generation_prompt=True,
-        )
+        messages = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": row["requirement"]},
+        ]
+        try:
+            text = tokenizer.apply_chat_template(  # type: ignore[no-untyped-call]
+                messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
+            )
+        except TypeError:  # 非 thinking 模型不支持该开关
+            text = tokenizer.apply_chat_template(  # type: ignore[no-untyped-call]
+                messages, tokenize=False, add_generation_prompt=True
+            )
         t0 = time.time()
         out = generate(
             model,

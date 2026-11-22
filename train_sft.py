@@ -44,6 +44,8 @@ def main() -> None:
     ap.add_argument("--iters", type=int, default=2000)
     ap.add_argument("--batch-size", type=int, default=4)
     ap.add_argument("--lr", type=float, default=1e-4)
+    ap.add_argument("--grad-accumulate", type=int, default=2)
+    ap.add_argument("--quantize", action="store_true", help="QLoRA：4bit 底座，显存大幅下降")
     ap.add_argument("--valid", type=int, default=100, help="从训练集划出的验证条数")
     args = ap.parse_args()
 
@@ -76,11 +78,15 @@ def main() -> None:
         str(args.iters),
         "--batch-size",
         str(args.batch_size),
+        "--grad-accumulation-steps",
+        str(args.grad_accumulate),
         "--num-layers",
         "16",
         "--learning-rate",
         str(args.lr),
     ]
+    if args.quantize:
+        cmd.append("--quantize")
     print(" ".join(cmd))
     raise SystemExit(subprocess.call(cmd))
 

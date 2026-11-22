@@ -93,5 +93,8 @@ def build_prompt(feature: tuple[str, str], scenario: str, difficulty: str, varia
         f"4. 需求用一句中文描述（不透露正则写法）；给出 regex、可选 flags"
         f"（只能是 i/m/s 的组合字符串，无则空串）、至少 3 个应匹配的正例"
         f"和至少 3 个不应匹配的反例。正反例必须是完整待检文本片段。\n"
-        f"只输出 JSON 对象，字段：requirement, regex, flags, positive, negative。不要解释。"
+        f"5. **语法必须是 Python re 模块（3.11）支持的语法**：不支持 \\p{{...}}、"
+        f"(?R)、递归、possessive 量词等 PCRE/JS 特性。提交前在心里自测每个用例。\n"
+        f"只输出 JSON 对象，字段：requirement, regex, flags, positive（字符串数组）、"
+        f"negative（字符串数组）。不要解释。"
     )

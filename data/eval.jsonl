@@ -1,0 +1,10 @@
+{"requirement": "匹配车牌号，如粤B12345。", "regex": "^[京津沪粤苏浙][A-Z][A-Z0-9]{5}$", "flags": "", "positive": ["京D5A7B2", "粤BB8A49", "苏G776B9"], "negative": ["A12345", "京12345", "京A1234", "沪A-12345"]}
+{"requirement": "匹配科学计数法数值，如3.14e10。", "regex": "(?:-?\\d+(\\.\\d+)?[eE][+-]?\\d+)", "flags": "m", "positive": ["3.14e10", "-2E-5", "1e3"], "negative": ["3.14", "e10", "1.5e", "-e3"]}
+{"requirement": "匹配完整的网页网址链接", "regex": "https?://[\\w.-]+(?:/[a-zA-Z0-9./?%&=-]*)?", "flags": "", "positive": ["https://example.com/a/b?x=1", "https://api.service.cn", "https://docs.test.org/docs"], "negative": ["example.com", "ftp://a.com", "https://", "http:/a.com"]}
+{"requirement": "匹配YYYY-MM-DD格式的日期，如2026-03-14。", "regex": "(\\d{4}\\-\\d{2}\\-\\d{2})", "flags": "m", "positive": ["2026-03-14", "2026-11-02", "2026-12-31"], "negative": ["2026-3-14", "20240314", "14-03-2026"]}
+{"requirement": "验证邮箱地址，确保格式正确。", "regex": "^[\\w.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z]{2,4}$", "flags": "", "positive": ["user01@mail.cn", "bob.wu@api.io", "team_dev@test.org"], "negative": ["plainaddress", "a@@b.com", "no.tld@", "@nodomain.com"]}
+{"requirement": "匹配中国大陆手机号，如13812345678。", "regex": "1[3-9]\\d{9}", "flags": "", "positive": ["19835615951", "17846564823", "18629946804"], "negative": ["4369957773", "872148951343", "23200379176", "1393676320"]}
+{"requirement": "提取四个到六个汉字的词语", "regex": "[一-龥]{4,6}", "flags": "m", "positive": ["摻枳廪錋糔", "踺烢挏滤训珇", "祛岽觲垣怄櫠"], "negative": ["胞", "hello123", "中x"]}
+{"requirement": "识别以短横线分隔的MAC地址", "regex": "([0-9A-Fa-f]{2}\\-){5}[0-9A-Fa-f]{2}", "flags": "", "positive": ["33-7B-4c-eb-FB-dC", "4d-E3-fD-d8-1b-6e", "e7-b3-Fb-BE-b1-c8"], "negative": ["74-C6-2B-6C-67", "g7-e2-F6-EE-D0-1a"]}
+{"requirement": "提取HTML标签，如<b>bold</b>。", "regex": "<.+?>", "flags": "", "positive": ["<b>bold</b>", "<i>it</i>", "<u>x</u>"], "negative": ["plain text", "a < b", "no tags"]}
+{"requirement": "匹配小时分钟格式的时间，如9:05。", "regex": "(?:\\d{1,2}:\\d{2}(:\\d{2})?)", "flags": "", "positive": ["9:05", "23:59", "0:00"], "negative": ["9:5", "9-30", "095", "9:"]}

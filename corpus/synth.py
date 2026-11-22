@@ -26,6 +26,7 @@ def synth(
 ) -> None:
     """生成 total 条候选 → 验证过滤 → train/eval 两份 jsonl 落盘。"""
     from mlx_lm import generate, load
+    from mlx_lm.sample_utils import make_sampler
 
     # load 返回类型是 2/3 元组的联合，索引取值避免 mypy 联合解包报错
     loaded = load(teacher_model)
@@ -37,34 +38,65 @@ def synth(
     rejected = 0
     seen_requirements: set[str] = set()
 
-    for i, (feature, scenario, difficulty, variant) in enumerate(plan):
-        prompt = build_prompt(feature, scenario, difficulty, variant)
-        messages = [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt},
-        ]
-        text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-        response = generate(
+    def chat(messages: list[dict[str, str]]) -> str:
+        # Qwen3 是 thinking 模型，默认输出 <think> 段会破坏 JSON 解析
+        text = tokenizer.apply_chat_template(  # type: ignore[no-untyped-call]
+            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False
+        )
+        response: str = generate(
             model,
             tokenizer,
             prompt=text,
             max_tokens=max_tokens,
-            temperature=temperature,
+            sampler=make_sampler(temp=temperature, top_p=0.95),
             verbose=False,
         )
-        sample = parse_teacher_json(response)
-        if sample is None:
+        return response
+
+    for i, (feature, scenario, difficulty, variant) in enumerate(plan):
+        prompt = build_prompt(feature, scenario, difficulty, variant)
+        sample = parse_teacher_json(
+            chat(
+                [
+                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "user", "content": prompt},
+                ]
+            )
+        )
+        ok, reason = (False, "JSON 解析失败") if sample is None else validate_sample(sample)
+
+        # 回炉一次：带着验证器的具体错误让 teacher 自修（通过率 20%→显著提升）
+        if not ok and sample is not None:
+            repair = parse_teacher_json(
+                chat(
+                    [
+                        {"role": "system", "content": SYSTEM_PROMPT},
+                        {"role": "user", "content": prompt},
+                        {"role": "assistant", "content": json.dumps(sample, ensure_ascii=False)},
+                        {
+                            "role": "user",
+                            "content": (
+                                f"你的答案未通过自动验证：{reason}。请修正（保持需求不变），只输出修正后的 JSON 对象。"
+                            ),
+                        },
+                    ]
+                )
+            )
+            if repair is not None:
+                sample = repair
+                ok, reason = validate_sample(sample)
+
+        if sample is None or not ok:
             rejected += 1
+            if i < 20:
+                print(f"  ✗ {reason}: {scenario}/{feature[0]}")
         else:
-            ok, reason = validate_sample(sample)
             requirement = sample.get("requirement")
-            if ok and isinstance(requirement, str) and requirement not in seen_requirements:
+            if isinstance(requirement, str) and requirement not in seen_requirements:
                 seen_requirements.add(requirement)
                 accepted.append(sample)
             else:
                 rejected += 1
-                if i < 20:
-                    print(f"  ✗ {reason}: {scenario}/{feature[0]}")
         if (i + 1) % 50 == 0:
             print(f"  进度 {i + 1}/{len(plan)} | 通过 {len(accepted)} | 拒绝 {rejected}")
 

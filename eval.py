@@ -11,7 +11,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import time
+from collections import Counter
 
 from corpus.validate import parse_flags, parse_teacher_json
 from train_sft import SYSTEM_PROMPT
@@ -62,8 +64,6 @@ def run_eval(model_path: str, adapter: str | None, eval_path: str, limit: int) -
             continue
         try:
             flags = parse_flags(sample.get("flags", "") if sample else "")
-            import re
-
             pattern = re.compile(regex, flags)
         except (re.error, ValueError):
             fail_reasons.append("编译失败")
@@ -81,6 +81,7 @@ def run_eval(model_path: str, adapter: str | None, eval_path: str, limit: int) -
         "pass_rate": passed / max(1, total),
         "avg_seconds": durations / max(1, total),
         "fail_reasons": fail_reasons,
+        "fail_counts": dict(Counter(fail_reasons)),
     }
 
 
@@ -99,9 +100,7 @@ def main() -> None:
         f"[{args.tag}] 通过 {result['passed']}/{result['total']} ({result['pass_rate']:.0%}) | "
         f"可编译 {result['compile_ok']} | 平均 {result['avg_seconds']:.1f}s/题"
     )
-    from collections import Counter
-
-    print("  失败归因:", dict(Counter(result["fail_reasons"])))
+    print("  失败归因:", result["fail_counts"])
     with open(f"docs/eval_{args.tag}.json", "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 

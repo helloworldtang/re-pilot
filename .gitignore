@@ -8,3 +8,5 @@ adapters/
 data_lora/
 docs/eval_*.json
 fused_model/
+data/generic.jsonl
+data/train_v4.jsonl

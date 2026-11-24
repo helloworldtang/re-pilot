@@ -19,11 +19,14 @@ SYSTEM_PROMPT = '你是正则助手。根据用户的中文需求输出 JSON：{
 
 
 def to_chat_rows(path: str) -> list[dict[str, list[dict[str, str]]]]:
-    """把语料转成 mlx-lm 的 messages 格式。"""
+    """把语料转成 mlx-lm 的 messages 格式（已是 chat 格式的行直接透传）。"""
     rows: list[dict[str, list[dict[str, str]]]] = []
     with open(path, encoding="utf-8") as f:
         for line in f:
             item = json.loads(line)
+            if "messages" in item:
+                rows.append(item)
+                continue
             answer = json.dumps({"regex": item["regex"], "flags": item["flags"]}, ensure_ascii=False)
             rows.append(
                 {

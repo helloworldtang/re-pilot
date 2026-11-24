@@ -1,0 +1,7 @@
+{
+  "indist_pct": 92,
+  "ood_pct": 15,
+  "indist": "92% (200 题)",
+  "ood": "15% (20 题)",
+  "status": "keeper"
+}

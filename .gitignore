@@ -10,3 +10,4 @@ docs/eval_*.json
 fused_model/
 data/train_v4.jsonl
 data/generic.jsonl
+runs/*/adapters/

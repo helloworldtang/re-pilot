@@ -36,14 +36,15 @@ uv run python cli.py "匹配中国大陆手机号" --test "13812345678"
 
 ## 实验台账
 
-所有训练尝试（成功与失败）登记在 [EXPERIMENTS.md](EXPERIMENTS.md)：顶部永远是当前最优版本，下方按时间倒序记录每次尝试的方案、结果、思考与后续建议。
+所有实验在 `runs/<日期_名>/` 下各自成一个自包含目录（config / 训练语料 / 评测结果 / 笔记 / 脚本快照），进目录即可复现。[EXPERIMENTS.md](EXPERIMENTS.md) 是台账索引：顶部 leaderboard 是当前最优，下方按时间倒序记录每次尝试的方案 → 结果 → 思考 → 下一步建议。
 
 ## 结构
 
 ```
 corpus/   语料管线：程序化出题引擎（100% 自洽）+ teacher 批量需求翻译
 data/     训练/评测语料（验证通过的样本）
-EXPERIMENTS.md  实验台账（顶部=当前最优，下方时间倒序）
+runs/      每个实验一个自包含目录（config/data/metrics/notes/scripts/adapters）
+EXPERIMENTS.md  实验台账（leaderboard + 四段式 log）
 train_sft.py  LoRA 训练入口（mlx-lm）
 eval.py   执行验证评测：底座 vs 蒸馏版
 cli.py    端侧入口：需求 → regex + 样例即时验证

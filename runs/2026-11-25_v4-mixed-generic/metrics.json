@@ -1,0 +1,7 @@
+{
+  "indist_pct": 94,
+  "ood_pct": 15,
+  "indist": "94% (200 题)",
+  "ood": "15% (20 题)",
+  "status": "failed"
+}

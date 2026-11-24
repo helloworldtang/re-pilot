@@ -1,0 +1,20 @@
+{
+  "corpus": "v2 领域 3797 + 通用指令 1923（teacher 五类任务生成）= 5720",
+  "iters": 3500,
+  "batch": 2,
+  "accum": 2,
+  "lr": 0.0001,
+  "lora_layers": 16,
+  "seed": 42,
+  "student": "Qwen/Qwen3.5-2B",
+  "teacher": "mlx-community/Qwen3-8B-8bit",
+  "runtime": "mlx-lm 0.32.2 LoRA",
+  "hardware": "Mac M-series 32GB unified memory (MPS)",
+  "benchmark": {
+    "indist": "data/eval.jsonl (200, held-out 需求, 训练见过的场景族)",
+    "ood": "data/ood_real.jsonl (20, 手造训练外场景族)",
+    "judge": "本机 re 执行验证"
+  },
+  "status": "failed",
+  "git_at_run": "d588bcb"
+}

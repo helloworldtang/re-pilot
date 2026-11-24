@@ -2,14 +2,15 @@
 
 ## 实验纪律
 
-- **每次训练尝试必须登记 `EXPERIMENTS.md`**：在"尝试记录"最上方插一条（方案 / 预立判据 / 结果 / 思考 / 后续建议）；若刷新最优，同步更新顶部"当前最优"段与全版本总表。失败也登记——负结果和成功同等重要
-- **跑实验前先预立判据**（域内与 OOD 各一个阈值），写进台账条目；没有判据的实验不开跑——预立判据防的是失败的伪装（"域内还涨了 2pp"这类半成功叙事）
-- **双基准**：域内 = `data/eval.jsonl`，OOD = `data/ood_real.jsonl`，两组同时报。OOD 基准必须保持 held-out 纯净——新增场景族时排除与它重叠的
-- **适配器显式命名**：多版本并存时脚本点名具体版本（`adapters_v2_keeper`），不用"当前 adapters"这类相对指称；链脚本里的 `mv` 操作前先 `ls -d adapters*` 确认
+- **仓库只保留 keeper**：`adapters/` + `data/{train,eval,ood_real}.jsonl` 是唯一受跟踪的模型资产。失败实验的权重与中间语料不入库、不留档——结论写进 `EXPERIMENTS.md` 一行即可
+- **实验产物带版本后缀**（`adapters_v5/`、`data/train_v5.jsonl`），已被 gitignore 覆盖；确认失败即删，确认更优才替换 keeper
+- **跑之前预立判据**：域内与 OOD 各一个阈值。没有判据不开跑——预立判据防的是失败的伪装
+- **双基准同报**：`data/eval.jsonl`（域内）+ `data/ood_real.jsonl`（OOD）。OOD 基准保持 held-out 纯净，新增场景族时排除与它重叠的
+- 刷新最优时同步更新 `EXPERIMENTS.md` 的"当前最优"段
 
 ## Git 纪律
 
-- **禁止裸 `git add -A`**：先 `git status` 过目，确认无大文件（本项目已两次翻车：checkpoints、fused_model 3.76GB 触发 GitHub 100MB 硬限）。新模型产物目录（`models/`、`fused_model/`、`adapters*/`、`data/*.jsonl` 生成物）先补 `.gitignore`
+- **禁止 `git add -A` / `git add .`**：只 add 点名的文件。本项目三次翻车：checkpoints 入库、fused_model 3.76GB 触发 GitHub 100MB 硬限、`mv` 改名 + `add -A` 把 keeper 权重从仓库删掉。新产物目录先补 `.gitignore`
 - 后台长任务：日志直落文件 + 末尾显式 `EXIT=$?`，不要管道接 tail/grep（会吃掉退出码与进度）
 - 发版按全局完备性检查：pyproject 版本 = tag、annotated tag、Release 四段 notes、tarball 实测 200
 

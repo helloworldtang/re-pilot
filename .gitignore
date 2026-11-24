@@ -3,10 +3,11 @@ __pycache__/
 *.egg-info/
 .DS_Store
 adapters/
+adapters_*/
 models/
-adapters/
 data_lora/
 docs/eval_*.json
 fused_model/
+data/train_v*.jsonl
+data/selftrain.jsonl
 data/generic.jsonl
-data/train_v4.jsonl

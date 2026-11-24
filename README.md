@@ -23,13 +23,16 @@ uv run python cli.py "匹配中国大陆手机号" --test "13812345678"
 
 ## 效果（held-out 200 题，本机 `re` 执行验证）
 
-| 模型 | 通过率 | 均时 |
-|---|---|---|
-| 底座裸跑 | 22% | 0.9s |
-| **蒸馏版** | **91%** | 1.0s |
+| 模型 | 域内 200 题 | 训练外 20 题 | 均时 |
+|---|---|---|---|
+| 底座裸跑 | 22% | 35% | 0.9s |
+| 蒸馏版（LoRA） | 91% | 15% | 1.0s |
+| **双模型路由（v0.2.0 默认）** | **94%** | **40%** | ~1s |
 
-蒸馏增益 +69pp，完全离线。实验全记录见 [docs/experiment.md](docs/experiment.md)，
-业界蒸馏路径全景与本项目的点亮情况见 [docs/distillation-map.md](docs/distillation-map.md)。
+蒸馏增益 +69pp；代价是灾难性遗忘（训练外 35%→15%，详见
+[docs/experiment.md](docs/experiment.md) 的四格对照实验）。v0.2.0 的双模型路由用
+验证器做路由器（蒸馏版先答，失败转底座+检索），把两端同时抬升、零训练零误伤。
+业界蒸馏路径全景与点亮情况见 [docs/distillation-map.md](docs/distillation-map.md)。
 
 ## 结构
 

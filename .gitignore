@@ -7,3 +7,4 @@ models/
 adapters/
 data_lora/
 docs/eval_*.json
+fused_model/

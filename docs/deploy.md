@@ -18,6 +18,14 @@
 2. Qwen3.5 多模态原生，GGUF 带独立 mmproj 视觉文件——Ollama 目前跑不了，llama.cpp 纯文本 GGUF 没问题；转换剥离视觉可再省体积
 3. 利好：llama.cpp 2026-05 合入 MTP 多 token 预测（1.5-2 倍生成提速）
 
+## 已诊断待修（2026-11-23）
+
+MLX→HF→GGUF 链首次产物乱码（等价性门禁 0/200 拦截）。根因已定位：
+①键名前缀反转（MLX 融合 `language_model.model.X` vs HF `model.language_model.X`），
+mlx2hf 需按键重映射而非直搬；②HF 底座为多模态（`model.visual.*` 视觉塔），
+需从底座补齐或转换时跳过；③Qwen3.5-2B 为线性注意力架构，键映射非平凡。
+修复后必须重过等价性门禁（同一套 200 题，91% 不掉才上线）。
+
 ## 部署链（v2/v3 定型后执行）
 
 ```

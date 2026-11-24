@@ -1,13 +1,27 @@
 {
   "name": "v5-adversarial",
   "hypothesis": "场景误绑（11 位数字→手机号）是因训练语料缺少同场景内的判别性反例；加入对抗样本改变数据的判别结构，可改善蒸馏版自身 OOD。性质不同于前四重证伪（它们是加同分布数据或换分布）。",
-  "criterion": {"ood_pct_min": 25, "indist_pct_min": 88,
-    "note": "OOD 门槛降到 25（不是 30）：目标是改善误绑机制，不是恢复被 LoRA 洗掉的 ICL 能力"},
+  "criterion": {
+    "ood_pct_min": 25,
+    "indist_pct_min": 88,
+    "note": "OOD 门槛降到 25（不是 30）：目标是改善误绑机制，不是恢复被 LoRA 洗掉的 ICL 能力"
+  },
   "student": "Qwen/Qwen3.5-2B",
   "teacher": "mlx-community/Qwen3-8B-8bit",
   "runtime": "mlx-lm 0.32.2 LoRA, MPS, Mac 32GB",
   "corpus": "v2 领域 3797 + 对抗样本 ~1200（易混淆场景对：手机号/QQ号/邮编、驼峰/标识符、IPv4/IPv6 等，同需求句式下答案不同）",
-  "iters": 3500, "batch": 2, "grad_accumulate": 2, "lr": 0.0001, "lora_layers": 16, "seed": 42,
-  "benchmark": {"indist": "data/eval.jsonl (200)", "ood": "data/ood_real.jsonl (20)", "judge": "本机 re 执行验证"},
-  "status": "running"
+  "iters": 3500,
+  "batch": 2,
+  "grad_accumulate": 2,
+  "lr": 0.0001,
+  "lora_layers": 16,
+  "seed": 42,
+  "benchmark": {
+    "indist": "data/eval.jsonl (200)",
+    "ood": "data/ood_real.jsonl (20)",
+    "judge": "本机 re 执行验证"
+  },
+  "status": "running",
+  "train_data_md5": "b72206f93cfe",
+  "corpus_actual": "3797 领域 + 1200 对抗 = 4997 行"
 }

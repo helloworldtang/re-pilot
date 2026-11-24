@@ -11,3 +11,5 @@ fused_model/
 data/train_v4.jsonl
 data/generic.jsonl
 runs/*/adapters/
+runs/*/data_lora/
+runs/*/data/train.jsonl

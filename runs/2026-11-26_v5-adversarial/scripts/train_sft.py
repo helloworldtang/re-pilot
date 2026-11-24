@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import subprocess
 import sys
@@ -52,6 +53,8 @@ def main() -> None:
     ap.add_argument("--valid", type=int, default=100, help="从训练集划出的验证条数")
 
     ap.add_argument("--train-file", default="data/train.jsonl", help="训练语料（可混自举数据）")
+    ap.add_argument("--adapter-dir", default="adapters", help="适配器输出目录（实验应指向 runs/<名>/adapters）")
+    ap.add_argument("--data-dir", default="data_lora", help="切分后的训练/验证集输出目录")
     args = ap.parse_args()
 
     rows = to_chat_rows(args.train_file)
@@ -59,16 +62,14 @@ def main() -> None:
     rng.shuffle(rows)
     valid_rows = rows[: args.valid]
     train_rows = rows[args.valid :]
-    import os
-
-    os.makedirs("data_lora", exist_ok=True)
-    with open("data_lora/train.jsonl", "w", encoding="utf-8") as f:
+    os.makedirs(args.data_dir, exist_ok=True)
+    with open(os.path.join(args.data_dir, "train.jsonl"), "w", encoding="utf-8") as f:
         for r in train_rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    with open("data_lora/valid.jsonl", "w", encoding="utf-8") as f:
+    with open(os.path.join(args.data_dir, "valid.jsonl"), "w", encoding="utf-8") as f:
         for r in valid_rows:
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    print(f"data_lora: train {len(train_rows)} | valid {len(valid_rows)}")
+    print(f"{args.data_dir}: train {len(train_rows)} | valid {len(valid_rows)}")
 
     cmd = [
         sys.executable,
@@ -89,6 +90,8 @@ def main() -> None:
         "16",
         "--learning-rate",
         str(args.lr),
+        "--adapter-path",
+        args.adapter_dir,
     ]
     if args.quantize:
         cmd.append("--quantize")

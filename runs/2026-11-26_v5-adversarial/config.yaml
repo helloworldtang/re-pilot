@@ -21,7 +21,7 @@
     "ood": "data/ood_real.jsonl (20)",
     "judge": "本机 re 执行验证"
   },
-  "status": "running",
+  "status": "failed",
   "train_data_md5": "b72206f93cfe",
   "corpus_actual": "3797 领域 + 1200 对抗 = 4997 行"
 }

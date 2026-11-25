@@ -1,1 +1,16 @@
-{}
+{
+  "indist_pct": 92,
+  "ood_pct": 15,
+  "indist": "92% (184/200)",
+  "ood": "15% (3/20)",
+  "criterion": {
+    "ood_min": 25,
+    "indist_min": 88
+  },
+  "verdict": "❌ 判负（OOD 未达 25；域内 92 达标）",
+  "baseline_v2": {
+    "indist": 92,
+    "ood": 15
+  },
+  "status": "failed"
+}

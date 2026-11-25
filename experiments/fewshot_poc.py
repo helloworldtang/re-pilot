@@ -74,12 +74,8 @@ ORACLE_MAP: dict[str, dict[str, str]] = {
 }
 
 
-def build_prompt(
-    tokenizer: Any,
-    requirement: str,
-    shots: list[dict[str, object]],
-) -> str:
-    """system + few-shot 多轮 + 真题。"""
+def build_messages(requirement: str, shots: list[dict[str, object]]) -> list[dict[str, str]]:
+    """system + few-shot 多轮 + 真题（纯函数，不依赖 tokenizer，HTTP 端点与本机共用）。"""
     from train_sft import SYSTEM_PROMPT
 
     messages: list[dict[str, str]] = [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -87,6 +83,16 @@ def build_prompt(
         messages.append({"role": "user", "content": str(shot["requirement"])})
         messages.append({"role": "assistant", "content": json.dumps(shot["answer"], ensure_ascii=False)})
     messages.append({"role": "user", "content": requirement})
+    return messages
+
+
+def build_prompt(
+    tokenizer: Any,
+    requirement: str,
+    shots: list[dict[str, object]],
+) -> str:
+    """system + few-shot 多轮 + 真题，套 chat template。"""
+    messages = build_messages(requirement, shots)
     try:
         text = tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True, enable_thinking=False

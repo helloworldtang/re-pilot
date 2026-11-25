@@ -1,0 +1,17 @@
+{
+  "name": "v6-9b-scale",
+  "question": "student 从 2B 放大到 9B，LoRA 领域微调造成的遗忘是否减轻？为 9B 全参 SFT 方案（两线合流 Phase 2）提供风险依据。",
+  "design": "受控对照：任务/语料/基准与 v2 完全相同，只换 student 为 Qwen3.5-9B。四格 = 底座/蒸馏版 × 零样本/+神谕示例，每格与 2B 同题对照。",
+  "criterion": {
+    "scale_protects": "9B LoRA 后 OOD 掉幅 ≤10pp（2B 为 35→15 = -20pp）→ 全参方案可信",
+    "scale_no_protect": "掉幅 ≥20pp（与 2B 同量级）→ 全参方案需重估，先不开云机",
+    "icl": "9B 蒸馏版 +示例是否仍上涨（2B 为 15→10，ICL 丢失）"
+  },
+  "student": "Qwen3.5-9B（推理走内网 omlx Qwen3.5-9B-OptiQ-4bit；LoRA 训练在本机 MLX bf16）",
+  "corpus": "data/train.jsonl 3797 条（与 v2 同，md5 见 train_data_md5）",
+  "iters": 3500, "batch": 1, "grad_accumulate": 4, "lr": 0.0001, "lora_layers": 16, "seed": 42,
+  "note_on_batch": "9B 在 32GB 统一内存上 batch 2 预期 OOM，用 batch1×accum4 保持有效 batch=4（与 v2 的 2×2 相同）",
+  "benchmark": {"indist": "data/eval.jsonl (200)", "ood": "data/ood_real.jsonl (20)", "judge": "本机 re 执行验证"},
+  "endpoint": "http://10.0.2.13:8001/v1（内网 omlx；key 走环境变量 OMLK_API_KEY，不落文件）",
+  "status": "running"
+}

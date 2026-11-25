@@ -13,3 +13,5 @@ data/generic.jsonl
 runs/*/adapters/
 runs/*/data_lora/
 runs/*/data/train.jsonl
+runs/2026-11-27_v6-9b-scale/data/train.jsonl
+runs/2026-11-27_v6-9b-scale/data_lora/
